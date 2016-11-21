@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx
 class GameWorld {
   
 	private val platforms = Buffer[Platform]()
-	private val player = new Player(Gdx.graphics.getWidth / 2 - 20, 0, 40, 40)
+	private val player = new Player(Camera.renderWidth / 2 - 40, 0, 80, 80)
 	
 	def update(delta: Float) = {
 		platforms.foreach(_.update(delta))
@@ -20,5 +20,7 @@ class GameWorld {
 		platforms.foreach(_.draw(batch))
 		player.draw(batch)
 	}
+	
+	def getPlayerPos = player.getPos
 	
 }

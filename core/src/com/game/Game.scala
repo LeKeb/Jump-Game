@@ -10,16 +10,23 @@ class Game extends ApplicationAdapter {
 	
 	private var batch: SpriteBatch = _
 	private var game: GameWorld = _ 
+	private var camera: Camera = _
 	
 	override def create() = {
 		batch = new SpriteBatch
 		AssetHandler.loadAssets()
 		game = new GameWorld
+		camera = new Camera
 	}
 	
 	override def render() = {
 		
 		game.update(Gdx.graphics.getDeltaTime)
+		
+		camera.setPosition(Camera.renderWidth / 2 , Camera.renderHeight / 2 + game.getPlayerPos.y)
+		camera.update()
+		
+		batch.setProjectionMatrix(camera.getCamera.combined)
 		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
