@@ -10,6 +10,7 @@ object AssetHandler {
 	object Texture {
 		val PLAYER = "player"
 		val NORMAL_PLATFORM = "normPlat"
+		val BOOST_PLATFORM = "boostPlat"
 	}
 	
 	object Sound {
@@ -24,8 +25,9 @@ object AssetHandler {
 	}
 	
 	def loadAssets() = {
-		(Texture.PLAYER, loadTexture("ball.png")) -> textures
-		(Texture.NORMAL_PLATFORM, loadTexture("NormalPlatform.png")) -> textures
+		textures += Texture.PLAYER -> loadTexture("ball.png")
+		textures += Texture.NORMAL_PLATFORM -> loadTexture("NormalPlatform.png")
+		textures += Texture.BOOST_PLATFORM -> loadTexture("BoostPlatform.png")
 	}
 	
 	def getTexture(texture: String) = {
