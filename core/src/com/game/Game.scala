@@ -9,19 +9,22 @@ import com.badlogic.gdx.graphics.GL20
 class Game extends ApplicationAdapter {
 	
 	private var batch: SpriteBatch = _
-	private var img: Texture = _
-	
+	private var game: GameWorld = _ 
 	
 	override def create() = {
 		batch = new SpriteBatch
-		img = new Texture("badlogic.jpg")
+		AssetHandler.loadAssets()
+		game = new GameWorld
 	}
 	
 	override def render() = {
-		Gdx.gl.glClearColor(1, 0, 1, 1);
+		
+		game.update(Gdx.graphics.getDeltaTime)
+		
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		game.draw(batch)
 		batch.end();
 	}
 	

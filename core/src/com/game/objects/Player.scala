@@ -1,10 +1,24 @@
 package com.game.objects
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion
+import com.game.AssetHandler
+
 class Player(x: Float, y: Float, w: Float, h: Float) {
   
-	private val xCoord = x
-	private val yCoord = y
-	private val width = w
-	private val height = h
+	val tex = new AtlasRegion(AssetHandler.getTexture(AssetHandler.Texture.PLAYER), 0, 0, 256, 256)
+	
+	private var xCoord = x
+	private var yCoord = y
+	private var width = w
+	private var height = h
+	
+	def update(delta: Float) = {
+		
+	}
+	
+	def draw(batch: SpriteBatch) = {
+		batch.draw(tex, xCoord, yCoord, width, height)
+	}
 	
 }

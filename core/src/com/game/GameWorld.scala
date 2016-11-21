@@ -9,14 +9,16 @@ import com.badlogic.gdx.Gdx
 class GameWorld {
   
 	private val platforms = Buffer[Platform]()
-	private val player = new Player(Gdx.graphics.getWidth - 60, 0, 120, 360)
+	private val player = new Player(Gdx.graphics.getWidth / 2 - 20, 0, 40, 40)
 	
 	def update(delta: Float) = {
-		
+		platforms.foreach(_.update(delta))
+		player.update(delta)
 	}
 	
 	def draw(batch: SpriteBatch) = {
-		
+		platforms.foreach(_.draw(batch))
+		player.draw(batch)
 	}
 	
 }
