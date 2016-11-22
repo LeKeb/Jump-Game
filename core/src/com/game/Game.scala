@@ -28,7 +28,7 @@ class Game extends ApplicationAdapter {
 		
 		batch.setProjectionMatrix(camera.getCamera.combined)
 		
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0, 0.7.toFloat, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		game.draw(batch)
