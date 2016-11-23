@@ -17,9 +17,12 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   private var xx = 1.toFloat
   
   def update(delta: Float) = {
-    xCoord += Math.sin(xx).toFloat * 10
+    xCoord += Math.sin(xx).toFloat * 20
     xx += 0.5.toFloat
+    //Pitää varmistaa, ettei pelaaja pääse ruudun ulkopuolelle.
   }
+  
+  //Hitbox
   
   def draw(batch: SpriteBatch) = {
     batch.draw(tex, xCoord, yCoord, width, height)
