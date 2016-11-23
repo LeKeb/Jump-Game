@@ -14,8 +14,11 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
 	private var width = w
 	private var height = h
 	
+	private var xx = 1
+	
 	def update(delta: Float) = {
-		
+		xCoord += Math.sin(xx).toFloat * 10
+		xx += 1
 	}
 	
 	def draw(batch: SpriteBatch) = {
