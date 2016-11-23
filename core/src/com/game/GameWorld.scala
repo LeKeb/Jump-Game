@@ -14,6 +14,9 @@ class GameWorld {
 	private val player = new Player(Camera.renderWidth / 2 - 40, 0, 80, 80)
 	
 	platforms += new BreakablePlatform(300, 400, 200, 30)
+	platforms += new NormalPlatform(200, 500, 200, 30)
+	platforms += new NormalPlatform(400, 600, 200, 30)
+	platforms += new BreakablePlatform(600, 800, 200, 30)
 	
 	def update(delta: Float) = {
 		

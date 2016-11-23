@@ -16,6 +16,7 @@ abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
 	
 	def draw(batch : SpriteBatch) = {
 		batch.draw(tex, xCoord, yCoord, width, height)
+	//Onko syytä varmistaa, ettei hyppytasoja voi luoda pelikentän koordinaattien ulkopuolelle?
 	}
 	
 }
