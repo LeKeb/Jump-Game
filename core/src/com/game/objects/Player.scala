@@ -15,41 +15,38 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   private var yCoord = y
   private var width = w
   private var height = h
+  
+  private var xVelo = 0.toFloat
+  private var yVelo = 0.toFloat
 
   private var xx = 1.toFloat
 
   def update(delta: Float) = {
     //Testipätkä alla.
-    // xCoord += Math.sin(xx).toFloat * 20
-    // xx += 0.5.toFloat
 
-    if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-      move(-10.toFloat, 0)
-    }
-    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-      move(10.toFloat, 0)
-    }
-    if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-      move(0.toFloat, -10.toFloat)
-    }
-    if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-      move(0.toFloat, 10.toFloat)
-    }
+    xCoord += xVelo
+    yCoord += yVelo
+    
     //Ideana on tehdä alle metodit, joita kutsutaan edellä.
 
     def jump = {
       //Hyödynnä sin-funktiota välillä 0, pi
     }
 
-    def move(moveSide: Float, moveUp: Float) = {
-      xCoord += moveSide
-      yCoord += moveUp
-    }
     //Pitää varmistaa, ettei pelaaja pääse ruudun ulkopuolelle. 
   }
 
   //Hitbox
-
+  
+  def setXVelo(x: Float) = {
+    xVelo = x
+  }
+  
+  def addVelo(x: Float, y: Float) = {
+    xVelo = Math.min( Math.max(xVelo + x, -15), 15)
+    yVelo = Math.min( Math.max(yVelo + y, -15), 15)
+  }
+  
   def draw(batch: SpriteBatch) = {
     batch.draw(tex, xCoord, yCoord, width, height)
   }
