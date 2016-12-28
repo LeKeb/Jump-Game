@@ -14,6 +14,8 @@ object AssetHandler {
     val BREAKABLE_PLATFORM = "breakPlat"
     val BREAKABLE_PLATFORM_BROKEN = "breakPlatBroken"
     val PLAY_BUTTON = "playButton"
+    val SLIDER_BACKGORUND = "sliderBack"
+    val SLIDER_BUTTON = "sliderButt"
   }
   
   object Sound {
@@ -38,6 +40,8 @@ object AssetHandler {
     textures += Texture.BREAKABLE_PLATFORM -> loadTexture("Platform2.png")
     textures += Texture.BREAKABLE_PLATFORM_BROKEN -> loadTexture("Platform2 broken.png")
     textures += Texture.PLAY_BUTTON -> loadTexture("PlayButton.png")
+    textures += Texture.SLIDER_BACKGORUND -> loadTexture("SliderBack.png")
+    textures += Texture.SLIDER_BUTTON -> loadTexture("SliderButton.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.wav")
   }

@@ -1,23 +1,72 @@
 package com.game.ui
 
 import com.badlogic.gdx.InputProcessor
+import com.game.ui.component.Component
+import scala.collection.mutable.Buffer
+import com.game.ui.component.Component
+import com.game.Utils
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
 abstract class Ui extends InputProcessor {
   
-  def keyDown(key: Int): Boolean = false
+  private val components = Buffer[Component]()
   
-  def keyTyped(key: Char): Boolean = false
+  protected def addComponent(comp: Component): Unit = {
+    components += comp
+  }
   
-  def keyUp(key: Int): Boolean = false
+  protected def removeComponent(comp: Component): Unit = {
+    components -= comp
+  }
   
-  def mouseMoved(x$1: Int,x$2: Int): Boolean = false
+  def keyDown(key: Int): Boolean = {
+    false
+  }
   
-  def scrolled(x$1: Int): Boolean = false
+  def keyTyped(key: Char): Boolean = {
+    false
+  }
   
-  def touchDown(x: Int, y: Int, pointer: Int, button: Int): Boolean = false
+  def keyUp(key: Int): Boolean = {
+    false
+  }
   
-  def touchDragged(x: Int, y: Int, pointer: Int): Boolean = false
+  def mouseMoved(x$1: Int,x$2: Int): Boolean = {
+    false
+  }
   
-  def touchUp(x: Int, y: Int, pointer: Int, button: Int): Boolean = false
+  def scrolled(x$1: Int): Boolean = {
+    false
+  }
+  
+  def touchDown(x: Int, y: Int, pointer: Int, button: Int): Boolean = {
+    val point = Utils.screenCoordToGameCoord(new Vector2(x, Gdx.graphics.getHeight - y))
+    for (comp <- components) {
+      comp.touchDown(point)
+    }
+    false
+  }
+  
+  def touchDragged(x: Int, y: Int, pointer: Int): Boolean = {
+    val point = Utils.screenCoordToGameCoord(new Vector2(x, Gdx.graphics.getHeight - y))
+    for (comp <- components) {
+      comp.touchDrag(point)
+    }
+    false
+  }
+  
+  def touchUp(x: Int, y: Int, pointer: Int, button: Int): Boolean = {
+    val point = Utils.screenCoordToGameCoord(new Vector2(x, Gdx.graphics.getHeight - y))
+    for (comp <- components) {
+      comp.touchUp(point)
+    }
+    false
+  }
+  
+  def draw(batch: SpriteBatch) = {
+    components.foreach(_.draw(batch))
+  }
   
 }

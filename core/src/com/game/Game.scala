@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Color
-import com.game.state.GameState
-import com.game.state.MainMenuState
-import com.game.state.State
+import com.game.state._
 
 object Game {
   
