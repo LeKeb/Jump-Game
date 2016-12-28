@@ -7,19 +7,17 @@ import com.game.objects.Player
 import com.badlogic.gdx.Gdx
 import com.game.objects.BreakablePlatform
 import com.game.objects.NormalPlatform
+import com.game.objects.BoostPlatform
 
 class GameWorld {
   
   private val platforms = Buffer[Platform]()
-  private val player = new Player(Camera.renderWidth / 2 - 40, 0, 80, 80)
+  private val player = new Player(Camera.renderWidth / 2 - 40, 50, 100, 100)
   private var leftPressed = false
   private var rightPressed = false
   
-  platforms += new BreakablePlatform(300, 400, 200, 30)
-  platforms += new NormalPlatform(200, 500, 200, 30)
-  platforms += new NormalPlatform(400, 600, 200, 30)
-  platforms += new BreakablePlatform(600, 800, 200, 30)
-  
+  platforms += new NormalPlatform(-100, -30, Camera.renderWidth + 200, 60)
+    
   def buttonChanged(left: Boolean, pressed: Boolean) = {
     if (left) {
       if (pressed)
@@ -40,17 +38,35 @@ class GameWorld {
   
   def update(delta: Float) = {
     
-    if (Gdx.input.isTouched()) {
-      platforms.filter(_.isInstanceOf[BreakablePlatform]).foreach(_.asInstanceOf[BreakablePlatform].break())
+    while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
+      val rand = math.random
+      val last = platforms.last
+      if (rand < 0.05) {
+        platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+      } else if (rand < 0.15) {
+        platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+      } else {
+        platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+      }
     }
     
     if (leftPressed)
-      player.addVelo(-1, 0)
+      player.addXVelo(-1)
     if (rightPressed)
-      player.addVelo(1, 0)
+      player.addXVelo(1)
     
     platforms.foreach(_.update(delta))
     player.update(delta)
+    
+    for (plat <- platforms) {
+      if (player.getHitBox.isColliding(plat.getHitBox) && player.getVelo.y < 0 && player.getThisJumpHighest > plat.getY + plat.getHeight) {
+        plat match {
+          case _: NormalPlatform => player.jump(1)
+          case _: BoostPlatform => player.jump(3)
+          case p: BreakablePlatform => p.break(); player.jump(0.5f)
+        }
+      }
+    }
   }
   
   def draw(batch: SpriteBatch) = {
@@ -58,6 +74,6 @@ class GameWorld {
     player.draw(batch)
   }
   
-  def getPlayerPos = player.getPos
+  def getPlayer = player
   
 }

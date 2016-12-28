@@ -34,7 +34,7 @@ object AssetHandler {
   }
   
   def loadAssets() = {
-    textures += Texture.PLAYER -> loadTexture("ball.png")
+    textures += Texture.PLAYER -> loadTexture("player.png")
     textures += Texture.NORMAL_PLATFORM -> loadTexture("Platform1.png")
     textures += Texture.BOOST_PLATFORM -> loadTexture("Platform3.png")
     textures += Texture.BREAKABLE_PLATFORM -> loadTexture("Platform2.png")

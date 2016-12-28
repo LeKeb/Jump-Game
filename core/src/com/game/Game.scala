@@ -34,10 +34,11 @@ class Game extends ApplicationAdapter {
   }
 
   override def render() = {
-
-    currentState.update(Gdx.graphics.getDeltaTime)
     
-    camera.setPosition(Camera.renderWidth / 2 , Camera.renderHeight / 2 + Game.gameState.getGame.getPlayerPos.y)
+    val delta = Gdx.graphics.getDeltaTime * 60
+    currentState.update(delta)
+    
+    camera.setPosition(Camera.renderWidth / 2, -Camera.renderHeight / 10 + Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord)
     camera.update()
     
     Gdx.gl.glClearColor(0, 0.7.toFloat, 1, 1);

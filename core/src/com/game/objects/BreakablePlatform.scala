@@ -11,7 +11,7 @@ class BreakablePlatform(x: Float, y: Float, w: Float, h: Float) extends Platform
   
   private val t1 = AssetHandler.getTexture(Texture.BREAKABLE_PLATFORM)
   private val t2 = AssetHandler.getTexture(Texture.BREAKABLE_PLATFORM_BROKEN)
-  protected val tex =  new AtlasRegion(t1, 0, 0, t1.getWidth, t1.getHeight)
+  tex = new AtlasRegion(t1, 0, 0, t1.getWidth, t1.getHeight)
   private val texLeft = new AtlasRegion(t2, 0, 0, t2.getWidth, t2.getHeight / 2)
   private val texRight = new AtlasRegion(t2, 0, t2.getHeight / 2, t2.getWidth, t2.getHeight / 2)
   
@@ -28,6 +28,8 @@ class BreakablePlatform(x: Float, y: Float, w: Float, h: Float) extends Platform
   private var rightYVelo = 0.toFloat
   private var leftRot = 0.toFloat
   private var rightRot = 0.toFloat
+  
+  def highestPossibleJump = 75
   
   def update(delta: Float) = {
     if (broken) {
@@ -59,6 +61,7 @@ class BreakablePlatform(x: Float, y: Float, w: Float, h: Float) extends Platform
       leftXVelo = (-Math.random() * 3).toFloat
       rightXVelo = (Math.random() * 3).toFloat
       Game.soundSystem.playSound(crackSound)
+      hitbox.setCoords(-10000, -10000)
     }
   }
   

@@ -19,7 +19,7 @@ class MainMenuUi extends Ui {
       )      
   )
   addComponent(
-      new Slider(Camera.renderWidth / 2, Camera.renderHeight / 4, 400, 50, 0, 100, 25, 
+      new Slider(Camera.renderWidth / 2, Camera.renderHeight / 4, 500, 60, 0, 100, 25, 
         (i: Int) => (Game.soundSystem.setMasterVolume(i))
       )
   )

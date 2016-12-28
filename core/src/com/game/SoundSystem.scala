@@ -12,7 +12,6 @@ class SoundSystem {
   
   def setMasterVolume(volume: Int) = {
     masterVolume = volume
-    println(masterVolume)
   }
   
 }
