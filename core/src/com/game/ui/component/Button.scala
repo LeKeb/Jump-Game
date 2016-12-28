@@ -32,8 +32,10 @@ class Button(x: Float, y: Float, w: Float, h: Float, tex: Texture, func: () => U
   }
   
   def touchUp(point: Vector2): Unit = {
-    if (containsPoint(point) && isPressed)
+    if (containsPoint(point) && isPressed) {
       func()
+      isPressed = false
+    }
   }
 
   

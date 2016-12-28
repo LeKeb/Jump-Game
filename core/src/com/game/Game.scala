@@ -11,6 +11,7 @@ import com.game.state._
 object Game {
   
   var game: Game = _
+  var soundSystem: SoundSystem = _
   val gameState = new GameState
   val mainMenuState = new MainMenuState
   
@@ -27,6 +28,7 @@ class Game extends ApplicationAdapter {
     AssetHandler.loadAssets()
     camera = new Camera
     Game.game = this
+    Game.soundSystem = new SoundSystem
     currentState = Game.mainMenuState
     currentState.enter()
   }

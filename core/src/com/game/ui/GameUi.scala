@@ -18,6 +18,8 @@ class GameUi extends Ui {
       Game.gameState.getGame.buttonChanged(true, true)
     } else if (key == Keys.D || key == Keys.RIGHT) {
       Game.gameState.getGame.buttonChanged(false, true)
+    } else if (key == Keys.ESCAPE) {
+      Game.game.enterState(Game.mainMenuState)
     }
     false
   }
