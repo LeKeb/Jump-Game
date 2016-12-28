@@ -9,11 +9,15 @@ import com.game.objects.BreakablePlatform
 import com.game.objects.NormalPlatform
 import com.game.objects.BoostPlatform
 import com.game.AssetHandler._
+import com.game.objects.Item
+import com.game.objects.Coconut
+import com.game.objects.Coconut
 
 class GameWorld {
   
   private val platforms = Buffer[Platform]()
-  private val player = new Player(Camera.renderWidth / 2 - 40, 50, 100, 100)
+  private val items = Buffer[Item]()
+  private val player = new Player(Camera.renderWidth / 2 - 40, 50, 120, 120)
   private var leftPressed = false
   private var rightPressed = false
   
@@ -39,6 +43,9 @@ class GameWorld {
   
   def update(delta: Float) = {
     
+    if (Gdx.input.isTouched())
+      player.blackOut(10)
+    
     while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
       val rand = math.random
       val last = platforms.last
@@ -51,11 +58,16 @@ class GameWorld {
       }
     }
     
+    if (Math.random() < 0.001) {
+      items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, platforms.last.getY, 100, 150)
+    }
+    
     if (leftPressed)
       player.addXVelo(-1)
     if (rightPressed)
       player.addXVelo(1)
     
+    items.foreach(_.update(delta))
     platforms.foreach(_.update(delta))
     player.update(delta)
     
@@ -68,6 +80,17 @@ class GameWorld {
         }
       }
     }
+    val toRemove = Buffer[Item]()
+    for (item <- items) {
+      if (player.getHitBox.isColliding(item.getHitBox)) {
+        item match {
+          case _: Coconut => player.blackOut(10); Game.soundSystem.playSound(getSound(Sound.STUNNED))
+        }
+        toRemove += item
+      }
+    }
+    items --= toRemove
+    
     if (player.getAllTimeHighestYCoord - 120 - (platforms.head.getY + platforms.head.getHeight) > Camera.renderHeight / 2)
       platforms.remove(0)
     if (player.getAllTimeHighestYCoord - 120 - (player.getPos.y) > Camera.renderHeight) {
@@ -78,6 +101,7 @@ class GameWorld {
   }
   
   def draw(batch: SpriteBatch) = {
+    items.foreach(_.draw(batch))
     platforms.foreach(_.draw(batch))
     player.draw(batch)
   }

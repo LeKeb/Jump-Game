@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Pixmap
 
 class Player(x: Float, y: Float, w: Float, h: Float) {
   
+  private val blackOut = getTexture(Texture.BLACK_OUT)
   private val texture = getTexture(Texture.PLAYER)
   private val tex = new AtlasRegion(texture, 0, 0, 372, 364)
   
@@ -31,6 +32,9 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   private var yVelo = 0.toFloat
 
   private var xx = 1.toFloat
+  
+  private var isBlackedOut = false
+  private var blackOutLeft = 0f
   
   private var yAllTimeMax = yCoord
   private var yThisJumpHighest = yCoord
@@ -55,7 +59,11 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     yAllTimeMax = Math.max(yCoord, yAllTimeMax)
     
     hitbox.setCoords(xCoord, yCoord)
-    //Ideana on tehdä alle metodit, joita kutsutaan edellä.
+    
+    blackOutLeft -= delta / 60f
+    
+    if (blackOutLeft <= 0)
+      isBlackedOut = false
 
     //Pitää varmistaa, ettei pelaaja pääse ruudun ulkopuolelle. 
   }
@@ -80,6 +88,8 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
       batch.draw(tex, xCoord, yCoord, width, height)
     else
       batch.draw(tex, xCoord + width, yCoord, -width, height)
+    if (isBlackedOut) 
+      batch.draw(blackOut, xCoord + width / 2 - blackOut.getWidth / 2, yCoord + height / 2 - blackOut.getHeight / 2)
   }
 
   def getPos = new Vector2(xCoord, yCoord)
@@ -91,5 +101,10 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   def getAllTimeHighestYCoord = yAllTimeMax
   
   def getThisJumpHighest = yThisJumpHighest
+  
+  def blackOut(time: Float) = {
+    isBlackedOut = true
+    blackOutLeft = time
+  }
   
 }
