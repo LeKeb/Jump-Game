@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx
 import com.game.objects.BreakablePlatform
 import com.game.objects.NormalPlatform
 import com.game.objects.BoostPlatform
+import com.game.AssetHandler._
 
 class GameWorld {
   
@@ -61,11 +62,18 @@ class GameWorld {
     for (plat <- platforms) {
       if (player.getHitBox.isColliding(plat.getHitBox) && player.getVelo.y < 0 && player.getThisJumpHighest > plat.getY + plat.getHeight) {
         plat match {
-          case _: NormalPlatform => player.jump(1)
-          case _: BoostPlatform => player.jump(3)
+          case _: NormalPlatform => player.jump(1); Game.soundSystem.playSound(getSound(Sound.JUMP))
+          case _: BoostPlatform => player.jump(3); Game.soundSystem.playSound(getSound(Sound.BOOST))
           case p: BreakablePlatform => p.break(); player.jump(0.5f)
         }
       }
+    }
+    if (player.getAllTimeHighestYCoord - 120 - (platforms.head.getY + platforms.head.getHeight) > Camera.renderHeight / 2)
+      platforms.remove(0)
+    if (player.getAllTimeHighestYCoord - 120 - (player.getPos.y) > Camera.renderHeight) {
+      //Game over
+      Game.soundSystem.playSound(getSound(Sound.GAME_OVER))
+      Game.game.enterState(Game.mainMenuState)
     }
   }
   

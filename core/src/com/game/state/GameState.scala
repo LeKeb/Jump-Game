@@ -9,13 +9,14 @@ class GameState extends State {
   
   
   private val ui = new GameUi
-  private val game = new GameWorld
+  private var game = new GameWorld
   
   
   def getGame = game
   
   override def enter() = {
     Gdx.input.setInputProcessor(ui)
+    game = new GameWorld
   }
   
   override def exit() = {

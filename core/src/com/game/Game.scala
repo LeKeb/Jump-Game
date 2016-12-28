@@ -38,7 +38,7 @@ class Game extends ApplicationAdapter {
     val delta = Gdx.graphics.getDeltaTime * 60
     currentState.update(delta)
     
-    camera.setPosition(Camera.renderWidth / 2, -Camera.renderHeight / 10 + Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord)
+    camera.setPosition(Camera.renderWidth / 2, Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord - 120)
     camera.update()
     
     Gdx.gl.glClearColor(0, 0.7.toFloat, 1, 1);

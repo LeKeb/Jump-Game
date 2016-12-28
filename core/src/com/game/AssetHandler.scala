@@ -20,6 +20,9 @@ object AssetHandler {
   
   object Sound {
     val CRACK = "crack"
+    val JUMP = "jump"
+    val BOOST = "boost"
+    val GAME_OVER = "gameOver"
   }
   
   private val textures: HashMap[String, Texture] = new HashMap[String, Texture]()
@@ -44,6 +47,9 @@ object AssetHandler {
     textures += Texture.SLIDER_BUTTON -> loadTexture("SliderButton.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.wav")
+    sounds += Sound.JUMP -> loadSound("jump.wav")
+    sounds += Sound.BOOST -> loadSound("boost.wav")
+    sounds += Sound.GAME_OVER -> loadSound("gameOver.wav")
   }
   
   def getTexture(texture: String) = {
