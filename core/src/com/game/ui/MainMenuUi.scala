@@ -19,9 +19,14 @@ class MainMenuUi extends Ui {
       )      
   )
   addComponent(
-      new Slider(Camera.renderWidth / 2, Camera.renderHeight / 4, 500, 60, 0, 100, 25, 
-        (i: Int) => (Game.soundSystem.setMasterVolume(i))
-      )
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 2 / 4, 375, 188, AssetHandler.getTexture(Texture.OPTIONS_BUTTON),
+        () => (Game.game.enterState(Game.optionState))    
+      )      
+  )
+  addComponent(
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 1 / 4, 375, 188, AssetHandler.getTexture(Texture.EXIT_BUTTON),
+        () => (Gdx.app.exit())    
+      )      
   )
    
 }

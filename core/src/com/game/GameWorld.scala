@@ -80,6 +80,7 @@ class GameWorld {
         }
       }
     }
+    
     val toRemove = Buffer[Item]()
     for (item <- items) {
       if (player.getHitBox.isColliding(item.getHitBox)) {

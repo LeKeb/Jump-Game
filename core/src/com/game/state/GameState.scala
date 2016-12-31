@@ -11,6 +11,8 @@ class GameState extends State {
   private val ui = new GameUi
   private var game = new GameWorld
   
+  private var isPaused = false
+  private val pauseState = new PauseState
   
   def getGame = game
   
@@ -20,19 +22,35 @@ class GameState extends State {
   }
   
   override def exit() = {
-    
+    isPaused = false
   }
   
   override def update(delta: Float) = {
-    game.update(delta)
+    if (!isPaused)
+      game.update(delta)
   }
   
   override def drawUi(batch: SpriteBatch) = {
     ui.draw(batch)
+    if (isPaused) {
+      pauseState.drawUi(batch)
+    }
   }
   
   override def drawGame(batch: SpriteBatch) = {
     game.draw(batch)
+  }
+  
+  def pause() = {
+    isPaused = true
+    pauseState.enter()
+    game.buttonChanged(true, false)
+    game.buttonChanged(false, false)
+  }
+  
+  def resume() = {
+    isPaused = false
+    pauseState.exit()
   }
   
 }

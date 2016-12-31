@@ -18,6 +18,9 @@ object AssetHandler {
     val SLIDER_BUTTON = "sliderButt"
     val BLACK_OUT = "black"
     val COCONUT = "coconut"
+    val EXIT_BUTTON = "exit"
+    val OPTIONS_BUTTON = "options"
+    val RESUME_BUTTON = "resume"
   }
   
   object Sound {
@@ -50,6 +53,9 @@ object AssetHandler {
     textures += Texture.SLIDER_BUTTON -> loadTexture("SliderButton.png")
     textures += Texture.BLACK_OUT -> loadTexture("BlackOut.png")
     textures += Texture.COCONUT -> loadTexture("Coconut2.png")
+    textures += Texture.EXIT_BUTTON -> loadTexture("ExitButton.png")
+    textures += Texture.OPTIONS_BUTTON -> loadTexture("OptionsButton.png")
+    textures += Texture.RESUME_BUTTON -> loadTexture("ResumeButton.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.wav")
     sounds += Sound.JUMP -> loadSound("jump.wav")
