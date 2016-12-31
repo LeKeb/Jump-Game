@@ -1,0 +1,32 @@
+package com.game.ui.component
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.game.AssetHandler._
+import com.badlogic.gdx.graphics.g2d.GlyphLayout
+
+class TextView(x: Float, y: Float, w: Float, h: Float, t: String) extends Component(x, y, w, h) {
+  
+  private val font = getFont(Font.DEFAULT)
+  private val layout = new GlyphLayout(font, t)
+  private var text = t;
+  
+  def setText(t: String) = {
+    text = t
+    layout.setText(font, t)
+  }
+  
+  
+  def draw(batch: SpriteBatch): Unit = {
+    val textWidth = layout.width
+    font.draw(batch, text, x - textWidth / 2, y)
+  }
+  
+  
+  def touchDown(point: Vector2): Unit = {}
+  
+  def touchDrag(point: Vector2): Unit = {}
+  
+  def touchUp(point: Vector2): Unit = {}
+}

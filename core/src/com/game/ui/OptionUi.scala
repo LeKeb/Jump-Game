@@ -6,6 +6,7 @@ import com.game.ui.component.Slider
 import com.game.AssetHandler._
 import com.game.ui.component.Button
 import com.badlogic.gdx.Input.Keys
+import com.game.ui.component.TextView
 
 class OptionUi extends Ui {
   
@@ -18,6 +19,9 @@ class OptionUi extends Ui {
       new Slider(Camera.renderWidth / 2, Camera.renderHeight * 2 / 3, 500, 60, 0, 100, 25, 
         (i: Int) => (Game.soundSystem.setMasterVolume(i))
       )
+  )
+  addComponent(
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 3 / 4, 0, 0, "Sound level:")    
   )
   
   override def keyDown(key: Int): Boolean = {

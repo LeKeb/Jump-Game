@@ -4,6 +4,7 @@ import scala.collection.mutable.HashMap
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 
 object AssetHandler {
   
@@ -31,8 +32,13 @@ object AssetHandler {
     val STUNNED = "stun"
   }
   
+  object Font {
+    val DEFAULT = "def"
+  }
+  
   private val textures: HashMap[String, Texture] = new HashMap[String, Texture]()
   private val sounds: HashMap[String, Sound] = new HashMap[String, Sound]()
+  private val fonts: HashMap[String, BitmapFont] = new HashMap[String, BitmapFont]()
   
   private def loadTexture(file: String) = {
     new Texture(Gdx.files.internal("Textures/" + file))
@@ -40,6 +46,10 @@ object AssetHandler {
   
   private def loadSound(file: String) = {
     Gdx.audio.newSound(Gdx.files.internal("Sounds/" + file))
+  }
+  
+  private def loadFont(file: String) = {
+    new BitmapFont(Gdx.files.internal("Fonts/" + file))
   }
   
   def loadAssets() = {
@@ -62,6 +72,8 @@ object AssetHandler {
     sounds += Sound.BOOST -> loadSound("boost.wav")
     sounds += Sound.GAME_OVER -> loadSound("gameOver.wav")
     sounds += Sound.STUNNED -> loadSound("stunned.wav")
+    
+    fonts += Font.DEFAULT -> loadFont("default.fnt")
   }
   
   def getTexture(texture: String) = {
@@ -70,6 +82,10 @@ object AssetHandler {
   
   def getSound(sound: String) = {
     sounds.get(sound).get
+  }
+  
+  def getFont(font: String) = {
+    fonts.get(font).get
   }
   
 }

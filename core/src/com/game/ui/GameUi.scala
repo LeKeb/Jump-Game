@@ -9,8 +9,13 @@ import com.badlogic.gdx.Input.Keys
 import com.game.Game
 import com.game.AssetHandler._
 import com.game.Camera
+import com.game.ui.component.TextView
 
 class GameUi extends Ui {
+  
+  val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 19 / 20, 0, 0, "0")
+  
+  addComponent(scoreView)
   
   override def keyDown(key: Int): Boolean = {
     super.keyDown(key)

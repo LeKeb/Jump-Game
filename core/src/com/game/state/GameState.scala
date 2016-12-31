@@ -26,8 +26,10 @@ class GameState extends State {
   }
   
   override def update(delta: Float) = {
-    if (!isPaused)
+    if (!isPaused) {
       game.update(delta)
+      ui.scoreView.setText(game.getPlayer.getAllTimeHighestYCoord.toInt.toString())
+    }
   }
   
   override def drawUi(batch: SpriteBatch) = {
