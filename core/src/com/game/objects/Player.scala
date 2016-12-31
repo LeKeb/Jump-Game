@@ -47,6 +47,10 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     
     yVelo -= 1f * delta
     
+    xVelo *= 0.9f * delta
+    if (xVelo.abs < 0.01)
+      xVelo = 0
+    
     if (xVelo != 0) {
       if (xVelo > 0) {
         lookingLeft = false
@@ -71,7 +75,7 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   //Hitbox
   
   def setXVelo(x: Float) = {
-    xVelo = x
+    xVelo = Math.min( Math.max(x, -15), 15)
   }
   
   def addXVelo(x: Float) = {

@@ -26,7 +26,7 @@ class OptionUi extends Ui {
   
   override def keyDown(key: Int): Boolean = {
     super.keyDown(key)
-    if (key == Keys.ESCAPE) {
+    if (key == Keys.ESCAPE || key == Keys.BACK) {
       Game.game.enterState(Game.mainMenuState)
     }
     false

@@ -62,7 +62,7 @@ object AssetHandler {
     textures += Texture.SLIDER_BACKGORUND -> loadTexture("SliderBack.png")
     textures += Texture.SLIDER_BUTTON -> loadTexture("SliderButton.png")
     textures += Texture.BLACK_OUT -> loadTexture("BlackOut.png")
-    textures += Texture.COCONUT -> loadTexture("Coconut2.png")
+    textures += Texture.COCONUT -> loadTexture("coconut2.png")
     textures += Texture.EXIT_BUTTON -> loadTexture("ExitButton.png")
     textures += Texture.OPTIONS_BUTTON -> loadTexture("OptionsButton.png")
     textures += Texture.RESUME_BUTTON -> loadTexture("ResumeButton.png")

@@ -32,6 +32,7 @@ class Game extends ApplicationAdapter {
     Game.soundSystem = new SoundSystem
     currentState = Game.mainMenuState
     currentState.enter()
+    
   }
 
   override def render() = {
@@ -64,6 +65,7 @@ class Game extends ApplicationAdapter {
     this.currentState.exit()
     this.currentState = state
     currentState.enter()
+    Gdx.input.setCatchBackKey(true)
   }
   
 }

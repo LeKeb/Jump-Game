@@ -27,6 +27,14 @@ class GameState extends State {
   
   override def update(delta: Float) = {
     if (!isPaused) {
+      
+      val rot = Gdx.input.getAccelerometerX
+      if (rot != 0) {
+        if (math.abs(rot) > 0.5) {
+          game.getPlayer.addXVelo(-rot * 2 / 3)
+        } 
+      }
+     
       game.update(delta)
       ui.scoreView.setText(game.getPlayer.getAllTimeHighestYCoord.toInt.toString())
     }

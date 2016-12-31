@@ -29,22 +29,17 @@ class GameWorld {
         leftPressed = true
       else {
         leftPressed = false
-        player.setXVelo(0)
       }
     } else {
       if (pressed)
         rightPressed = true
       else {
         rightPressed = false
-        player.setXVelo(0)
       }
     }
   }
   
   def update(delta: Float) = {
-    
-    if (Gdx.input.isTouched())
-      player.blackOut(10)
     
     while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
       val rand = math.random
@@ -63,9 +58,9 @@ class GameWorld {
     }
     
     if (leftPressed)
-      player.addXVelo(-1)
+      player.addXVelo(-2)
     if (rightPressed)
-      player.addXVelo(1)
+      player.addXVelo(2)
     
     items.foreach(_.update(delta))
     platforms.foreach(_.update(delta))
