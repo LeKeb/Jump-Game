@@ -12,6 +12,7 @@ import com.game.AssetHandler._
 import com.game.objects.Item
 import com.game.objects.Coconut
 import com.game.objects.Coconut
+import com.game.background.Background
 
 class GameWorld {
   
@@ -20,6 +21,8 @@ class GameWorld {
   private val player = new Player(Camera.renderWidth / 2 - 40, 50, 120, 120)
   private var leftPressed = false
   private var rightPressed = false
+  
+  private val background = new Background
   
   platforms += new NormalPlatform(-100, -30, Camera.renderWidth + 200, 60)
     
@@ -97,6 +100,7 @@ class GameWorld {
   }
   
   def draw(batch: SpriteBatch) = {
+    background.draw(batch)
     items.foreach(_.draw(batch))
     platforms.foreach(_.draw(batch))
     player.draw(batch)

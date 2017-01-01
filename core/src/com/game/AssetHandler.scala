@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.audio.Music
 
 object AssetHandler {
   
@@ -22,6 +23,11 @@ object AssetHandler {
     val EXIT_BUTTON = "exit"
     val OPTIONS_BUTTON = "options"
     val RESUME_BUTTON = "resume"
+    val PALM_TREE_TRUNK = "trunk"
+    val PALM_TREE_TOP = "top"
+    val BACKGROUND = "back"
+    val PARALLAX_BACKGROUND = "para"
+    val PARALLAX_BACKGROUND2 = "para2"
   }
   
   object Sound {
@@ -66,6 +72,11 @@ object AssetHandler {
     textures += Texture.EXIT_BUTTON -> loadTexture("ExitButton.png")
     textures += Texture.OPTIONS_BUTTON -> loadTexture("OptionsButton.png")
     textures += Texture.RESUME_BUTTON -> loadTexture("ResumeButton.png")
+    textures += Texture.PALM_TREE_TOP -> loadTexture("palmTreeTop.png")
+    textures += Texture.PALM_TREE_TRUNK -> loadTexture("palmTreeTrunk.png")
+    textures += Texture.BACKGROUND -> loadTexture("Background.png")
+    textures += Texture.PARALLAX_BACKGROUND -> loadTexture("parallaxBackground.png")
+    textures += Texture.PARALLAX_BACKGROUND2 -> loadTexture("parallaxBackground2.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.wav")
     sounds += Sound.JUMP -> loadSound("jump.wav")

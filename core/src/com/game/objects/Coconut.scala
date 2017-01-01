@@ -16,7 +16,7 @@ class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
   
   protected val hitbox = new Hitbox(x, y, w, h, pixmap)
   
-  protected val tex: AtlasRegion = new AtlasRegion(texture, 0, 0, 192, 242)
+  protected val tex: AtlasRegion = new AtlasRegion(texture, 0, 0, texture.getWidth, texture.getHeight)
   
   private var xVelo = 0f
   private var yVelo = 0f
