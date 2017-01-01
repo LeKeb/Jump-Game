@@ -38,12 +38,18 @@ object AssetHandler {
     val STUNNED = "stun"
   }
   
+  object Music {
+    val MENU = "menu"
+    val GAME = "game"
+  }
+  
   object Font {
     val DEFAULT = "def"
   }
   
   private val textures: HashMap[String, Texture] = new HashMap[String, Texture]()
   private val sounds: HashMap[String, Sound] = new HashMap[String, Sound]()
+  private val music: HashMap[String, Music] = new HashMap[String, Music]()
   private val fonts: HashMap[String, BitmapFont] = new HashMap[String, BitmapFont]()
   
   private def loadTexture(file: String) = {
@@ -56,6 +62,10 @@ object AssetHandler {
   
   private def loadFont(file: String) = {
     new BitmapFont(Gdx.files.internal("Fonts/" + file))
+  }
+  
+  private def loadMusic(file: String) = {
+    Gdx.audio.newMusic(Gdx.files.internal("Music/" + file))
   }
   
   def loadAssets() = {
@@ -84,6 +94,9 @@ object AssetHandler {
     sounds += Sound.GAME_OVER -> loadSound("gameOver.wav")
     sounds += Sound.STUNNED -> loadSound("stunned.wav")
     
+    music += Music.GAME -> loadMusic("music2.wav")
+    music += Music.MENU -> loadMusic("music.wav")
+    
     fonts += Font.DEFAULT -> loadFont("default.fnt")
   }
   
@@ -93,6 +106,10 @@ object AssetHandler {
   
   def getSound(sound: String) = {
     sounds.get(sound).get
+  }
+  
+  def getMusic(music: String) = {
+    this.music.get(music).get
   }
   
   def getFont(font: String) = {

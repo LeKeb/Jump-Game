@@ -38,6 +38,7 @@ class Slider(x: Float, y: Float, w: Float, h: Float, min: Int, max: Int, spacing
   def touchDrag(point: Vector2): Unit = {
     if (isTouching) {
       value = Math.min(maxVal, Math.max(0, ((point.x - xCoord) / width) * maxVal)).toInt
+      func(value)
     }
   }
   

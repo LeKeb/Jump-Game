@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.Gdx
 import com.game.ui.GameUi
 import com.game.GameWorld
+import com.game.Game
+import com.game.AssetHandler
 
 class GameState extends State {
   
@@ -19,6 +21,7 @@ class GameState extends State {
   override def enter() = {
     Gdx.input.setInputProcessor(ui)
     game = new GameWorld
+    Game.soundSystem.loopMusic(AssetHandler.getMusic(AssetHandler.Music.GAME))
   }
   
   override def exit() = {

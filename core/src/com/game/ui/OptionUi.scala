@@ -17,11 +17,19 @@ class OptionUi extends Ui {
   )
   addComponent(
       new Slider(Camera.renderWidth / 2, Camera.renderHeight * 2 / 3, 500, 60, 0, 100, 25, 
-        (i: Int) => (Game.soundSystem.setMasterVolume(i))
+        (i: Int) => (Game.soundSystem.setSoundVolume(i))
       )
   )
   addComponent(
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 3 / 4, 0, 0, "Sound level:")    
+  )
+  addComponent(
+      new Slider(Camera.renderWidth / 2, Camera.renderHeight * 4 / 5, 500, 60, 0, 100, 25, 
+        (i: Int) => (Game.soundSystem.setMusicVolume(i))
+      )
+  )
+  addComponent(
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 9 / 10, 0, 0, "Music level:")    
   )
   
   override def keyDown(key: Int): Boolean = {
