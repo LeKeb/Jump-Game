@@ -88,14 +88,14 @@ object AssetHandler {
     textures += Texture.PARALLAX_BACKGROUND -> loadTexture("parallaxBackground.png")
     textures += Texture.PARALLAX_BACKGROUND2 -> loadTexture("parallaxBackground2.png")
     
-    sounds += Sound.CRACK -> loadSound("cracking.wav")
-    sounds += Sound.JUMP -> loadSound("jump.wav")
-    sounds += Sound.BOOST -> loadSound("boost.wav")
-    sounds += Sound.GAME_OVER -> loadSound("gameOver.wav")
-    sounds += Sound.STUNNED -> loadSound("stunned.wav")
+    sounds += Sound.CRACK -> loadSound("cracking.ogg")
+    sounds += Sound.JUMP -> loadSound("jump.ogg")
+    sounds += Sound.BOOST -> loadSound("boost.ogg")
+    sounds += Sound.GAME_OVER -> loadSound("gameOver.ogg")
+    sounds += Sound.STUNNED -> loadSound("stunned.ogg")
     
-    music += Music.GAME -> loadMusic("music2.wav")
-    music += Music.MENU -> loadMusic("music.wav")
+    music += Music.GAME -> loadMusic("music2.ogg")
+    music += Music.MENU -> loadMusic("music.ogg")
     
     fonts += Font.DEFAULT -> loadFont("default.fnt")
   }
