@@ -29,7 +29,7 @@ class OptionUi extends Ui {
       )
   )
   addComponent(
-      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 9 / 10, 0, 0, "Music level:")    
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 53 / 60, 0, 0, "Music level:")    
   )
   
   override def keyDown(key: Int): Boolean = {
