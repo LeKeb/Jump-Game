@@ -47,9 +47,11 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     xCoord += xVelo * delta
     yCoord += yVelo * delta
     
-    yVelo -= 1f * delta
+    println(xVelo)
     
-    xVelo *= 0.9f * delta
+    yVelo -= (1f * delta)
+    
+    xVelo *= 0.9f
     if (xVelo.abs < 0.01)
       xVelo = 0
     
