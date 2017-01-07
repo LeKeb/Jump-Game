@@ -10,8 +10,10 @@ import com.game.Game
 import com.game.AssetHandler._
 import com.game.Camera
 import com.game.ui.component.TextView
+import com.game.state.State
+import com.game.state.GameState
 
-class GameUi extends Ui {
+class GameUi(state: State) extends Ui(state) {
   
   val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 19 / 20, 0, 0, "0")
   
@@ -24,7 +26,7 @@ class GameUi extends Ui {
     } else if (key == Keys.D || key == Keys.RIGHT) {
       Game.gameState.getGame.buttonChanged(false, true)
     } else if (key == Keys.ESCAPE || key == Keys.BACK) {
-      Game.gameState.pause()
+      parentState.asInstanceOf[GameState].pause()
     }
     false
   }

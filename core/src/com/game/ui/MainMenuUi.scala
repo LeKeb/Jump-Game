@@ -11,8 +11,10 @@ import com.badlogic.gdx.Gdx
 import com.game.Utils
 import com.game.ui.component.Slider
 import com.game.ui.component.TextView
+import com.game.state.State
+import com.game.state.MainMenuState
 
-class MainMenuUi extends Ui {
+class MainMenuUi(state: State) extends Ui(state) {
   
   addComponent(
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 13 / 14, 0, 0, "Doodle Jump 3000")    
@@ -24,7 +26,7 @@ class MainMenuUi extends Ui {
   )
   addComponent(
       new Button(Camera.renderWidth / 2, Camera.renderHeight * 2 / 4, 375, 188, AssetHandler.getTexture(Texture.OPTIONS_BUTTON),
-        () => (Game.game.enterState(Game.optionState))    
+        () => (parentState.asInstanceOf[MainMenuState].enterOptions())    
       )      
   )
   addComponent(

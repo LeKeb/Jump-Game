@@ -10,14 +10,19 @@ import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion
 import com.game.AssetHandler._
 import com.game.Camera
+import com.game.ui.OptionUi
 
 class PauseState extends State {
   
-  private val ui = new PauseUi
+  private val ui = new PauseUi(this)
   
   private var gameInputProcessor: InputProcessor = _
   
   private val background = new AtlasRegion(getTexture(Texture.BLACK_OUT), 0, 0, 1, 1)
+  
+  private val optionUi = new OptionUi(this)
+  
+  private var isInOptions = false
   
   override def enter() = {
     gameInputProcessor = Gdx.input.getInputProcessor
@@ -37,11 +42,24 @@ class PauseState extends State {
     batch.setColor(0, 0, 0, 0.5f)
     batch.draw(background, 0, 0, Camera.renderWidth, Camera.renderHeight)
     batch.setColor(color)
-    ui.draw(batch)
+    if (isInOptions)
+      optionUi.draw(batch)
+    else
+      ui.draw(batch)
   }
   
   override def drawGame(batch: SpriteBatch) = {
 
+  }
+  
+  def enterOptions() = {
+    Gdx.input.setInputProcessor(optionUi)
+    isInOptions = true
+  }
+  
+  def exitOptions() = {
+    Gdx.input.setInputProcessor(ui)
+    isInOptions = false
   }
   
 }

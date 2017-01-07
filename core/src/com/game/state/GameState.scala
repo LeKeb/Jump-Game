@@ -10,7 +10,7 @@ import com.game.AssetHandler
 class GameState extends State {
   
   
-  private val ui = new GameUi
+  private val ui = new GameUi(this)
   private var game = new GameWorld
   
   private var isPaused = false

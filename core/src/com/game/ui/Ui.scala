@@ -8,10 +8,13 @@ import com.game.Utils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.game.state.State
 
-abstract class Ui extends InputProcessor {
+abstract class Ui(state: State) extends InputProcessor {
   
   private val components = Buffer[Component]()
+  
+  protected val parentState = state
   
   protected def addComponent(comp: Component): Unit = {
     components += comp

@@ -6,19 +6,26 @@ import com.game.Game
 import com.game.AssetHandler._
 import com.badlogic.gdx.Input.Keys
 import com.game.ui.component.TextView
+import com.game.state.State
+import com.game.state.PauseState
 
-class PauseUi extends Ui {
+class PauseUi(state: State) extends Ui(state) {
   
   addComponent(
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 7 / 8, 0, 0, "Paused")    
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 2 / 3, 375, 188, getTexture(Texture.RESUME_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 5 / 8, 375, 188, getTexture(Texture.RESUME_BUTTON),
         () => (Game.gameState.resume())
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight / 3, 375, 188, getTexture(Texture.EXIT_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 3 / 8, 375, 188, getTexture(Texture.OPTIONS_BUTTON),
+        () => (parentState.asInstanceOf[PauseState].enterOptions())
+      )      
+  )
+  addComponent(
+      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 375, 188, getTexture(Texture.EXIT_BUTTON),
         () => (Game.game.enterState(Game.mainMenuState))
       )      
   )

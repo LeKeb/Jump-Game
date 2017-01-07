@@ -14,7 +14,6 @@ object Game {
   var soundSystem: SoundSystem = _
   val gameState = new GameState
   val mainMenuState = new MainMenuState
-  val optionState = new OptionState
   
 }
 

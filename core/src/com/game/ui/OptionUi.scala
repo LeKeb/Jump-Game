@@ -7,12 +7,20 @@ import com.game.AssetHandler._
 import com.game.ui.component.Button
 import com.badlogic.gdx.Input.Keys
 import com.game.ui.component.TextView
+import com.game.state.State
+import com.game.state.MainMenuState
+import com.game.state.PauseState
 
-class OptionUi extends Ui {
+class OptionUi(state: State) extends Ui(state) {
   
   addComponent(
       new Button(Camera.renderWidth / 2, Camera.renderHeight / 3, 375, 188, getTexture(Texture.EXIT_BUTTON),
-        () => (Game.game.enterState(Game.mainMenuState))
+        () => (
+            if (parentState.isInstanceOf[MainMenuState])
+              parentState.asInstanceOf[MainMenuState].exitOptions()
+            else
+              parentState.asInstanceOf[PauseState].exitOptions()
+            )
       )      
   )
   addComponent(
