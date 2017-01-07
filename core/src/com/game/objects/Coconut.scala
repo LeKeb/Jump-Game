@@ -5,10 +5,14 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion
 import com.game.AssetHandler._
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.game.Game
+import com.game.Camera
+import com.badlogic.gdx.graphics.OrthographicCamera
 
 class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
   
   private val texture = getTexture(Texture.COCONUT)
+  private val warnTex = getTexture(Texture.WARNING)
   
   private val pixmap = new Pixmap(w.toInt, h.toInt, Pixmap.Format.RGBA8888)
   texture.getTextureData.prepare()
@@ -23,8 +27,19 @@ class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
   
   private var angle = 0f
   
+  private val cam = new OrthographicCamera(Camera.renderWidth, Camera.renderHeight)
+  
+  cam.position.set(Camera.renderWidth / 2, Camera.renderHeight / 2, 0)
+  cam.update()
+  
   override def draw(batch: SpriteBatch) = {
     batch.draw(tex, xCoord, yCoord, width, height)
+    if (yCoord > Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord) {
+      val mat = batch.getProjectionMatrix.cpy()
+      batch.setProjectionMatrix(cam.combined)
+      batch.draw(warnTex, xCoord + width / 2 - 16.5f, Camera.renderHeight - 120, 33, 100)
+      batch.setProjectionMatrix(mat)
+    }
   }
   
   def update(delta: Float): Unit = {

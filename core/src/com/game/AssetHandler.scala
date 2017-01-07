@@ -28,6 +28,7 @@ object AssetHandler {
     val BACKGROUND = "back"
     val PARALLAX_BACKGROUND = "para"
     val PARALLAX_BACKGROUND2 = "para2"
+    val WARNING = "warn"
   }
   
   object Sound {
@@ -87,6 +88,7 @@ object AssetHandler {
     textures += Texture.BACKGROUND -> loadTexture("Background.png")
     textures += Texture.PARALLAX_BACKGROUND -> loadTexture("parallaxBackground.png")
     textures += Texture.PARALLAX_BACKGROUND2 -> loadTexture("parallaxBackground2.png")
+    textures += Texture.WARNING -> loadTexture("Warning.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")

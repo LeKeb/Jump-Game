@@ -57,7 +57,7 @@ class GameWorld {
     }
     
     if (Math.random() < 0.001) {
-      items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, platforms.last.getY, 100, 150)
+      items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
     }
     
     if (leftPressed)
@@ -101,8 +101,8 @@ class GameWorld {
   
   def draw(batch: SpriteBatch) = {
     background.draw(batch)
-    items.foreach(_.draw(batch))
     platforms.foreach(_.draw(batch))
+    items.foreach(_.draw(batch))
     player.draw(batch)
   }
   

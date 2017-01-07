@@ -39,7 +39,7 @@ class GameState extends State {
       }
      
       game.update(delta)
-      ui.scoreView.setText(game.getPlayer.getAllTimeHighestYCoord.toInt.toString())
+      ui.scoreView.setText((game.getPlayer.getAllTimeHighestYCoord / 10).toInt.toString())
     }
   }
   
