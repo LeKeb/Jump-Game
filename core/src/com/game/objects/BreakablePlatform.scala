@@ -29,7 +29,7 @@ class BreakablePlatform(x: Float, y: Float, w: Float, h: Float) extends Platform
   private var leftRot = 0f
   private var rightRot = 0f
   
-  def highestPossibleJump = 75
+  def highestPossibleJump = 425
   
   def update(delta: Float) = {
     if (broken) {

@@ -22,4 +22,8 @@ abstract class Item(x: Float, y: Float, w: Float, h: Float) {
   
   def getHitBox = hitbox
   
+  def getY = yCoord
+  
+  def getHeight = height
+  
 }

@@ -39,17 +39,23 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   private var isConfused = false
   private var confuseLeft = 0f
   
+  private var isBurning = false
+  private var burnLeft = 0f
+  
   private var yAllTimeMax = yCoord
   private var yThisJumpHighest = yCoord
 
   def update(delta: Float) = {
     
-    xCoord += xVelo * delta
-    yCoord += yVelo * delta
+    var multiplier = 1f
     
-    println(xVelo)
+    if (isBurning)
+      multiplier = 2f
     
-    yVelo -= (1f * delta)
+    xCoord += xVelo * delta * multiplier
+    yCoord += yVelo * delta * multiplier
+    
+    yVelo -= (1f * delta * multiplier)
     
     xVelo *= 0.9f
     if (xVelo.abs < 0.01)
@@ -70,11 +76,14 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     
     blackOutLeft -= delta / 60f
     confuseLeft -= delta / 60f
+    burnLeft -= delta / 60f
     
     if (blackOutLeft <= 0)
       isBlackedOut = false
     if (confuseLeft <= 0)
       isConfused = false
+    if (burnLeft <= 0)
+      isBurning = false
       
     //Pitää varmistaa, ettei pelaaja pääse ruudun ulkopuolelle. 
   }
@@ -128,5 +137,12 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     isConfused = true
     confuseLeft = time
   }
+  
+  def burn(time: Float) = {
+    isBurning = true
+    burnLeft = time
+  }
+  
+  def burning = isBurning
   
 }

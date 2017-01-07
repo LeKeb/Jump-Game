@@ -15,6 +15,9 @@ import com.game.objects.Coconut
 import com.game.background.Background
 import com.game.objects.Confuser
 import com.game.objects.Confuser
+import com.game.objects.Fire
+import com.game.objects.Fire
+import com.game.objects.Fire
 
 class GameWorld {
   
@@ -27,7 +30,7 @@ class GameWorld {
   private val background = new Background
   
   platforms += new NormalPlatform(Camera.renderWidth / 2, -30, Camera.renderWidth + 200, 60)
-    
+  
   def buttonChanged(left: Boolean, pressed: Boolean) = {
     if (left) {
       if (pressed)
@@ -51,14 +54,17 @@ class GameWorld {
       val last = platforms.last
       if (rand < 0.05) {
         platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
-      } else if (rand < 0.15) {
+      } else if (rand < 0.15 || items.exists(_.isInstanceOf[Fire]) || player.burning) {
         platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
       } else {
         platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
       }
       
-      if (math.random < 0.04)
+      val rand2 = math.random
+      if (rand2 < 0.04)
         items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
+      else if (rand2 < 0.08 && platforms.last.isInstanceOf[NormalPlatform])
+        items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
     }
     
     if (Math.random() < 0.001) {
@@ -79,7 +85,7 @@ class GameWorld {
         plat match {
           case _: NormalPlatform => player.jump(1); Game.soundSystem.playSound(getSound(Sound.JUMP))
           case _: BoostPlatform => player.jump(3); Game.soundSystem.playSound(getSound(Sound.BOOST))
-          case p: BreakablePlatform => p.break(); player.jump(0.5f)
+          case p: BreakablePlatform => p.break(); player.jump(1)
         }
       }
     }
@@ -88,11 +94,13 @@ class GameWorld {
     for (item <- items) {
       if (player.getHitBox.isColliding(item.getHitBox)) {
         item match {
-          case _: Coconut => player.blackOut(10); Game.soundSystem.playSound(getSound(Sound.STUNNED))
-          case _: Confuser => player.confuse(10); Game.soundSystem.playSound(getSound(Sound.CONFUSE))
+          case _: Coconut => player.blackOut(10); Game.soundSystem.playSound(getSound(Sound.STUNNED)); toRemove += item
+          case _: Confuser => player.confuse(10); Game.soundSystem.playSound(getSound(Sound.CONFUSE)); toRemove += item
+          case _: Fire => player.burn(10); Game.soundSystem.playSound(getSound(Sound.SCREAM))
         }
-        toRemove += item
       }
+      if (player.getAllTimeHighestYCoord - 120 - (item.getY + item.getHeight) > Camera.renderHeight / 2)
+        toRemove += item
     }
     items --= toRemove
     
