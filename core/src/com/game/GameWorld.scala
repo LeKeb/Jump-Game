@@ -13,6 +13,8 @@ import com.game.objects.Item
 import com.game.objects.Coconut
 import com.game.objects.Coconut
 import com.game.background.Background
+import com.game.objects.Confuser
+import com.game.objects.Confuser
 
 class GameWorld {
   
@@ -54,6 +56,9 @@ class GameWorld {
       } else {
         platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
       }
+      
+      if (math.random < 0.04)
+        items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
     }
     
     if (Math.random() < 0.001) {
@@ -84,6 +89,7 @@ class GameWorld {
       if (player.getHitBox.isColliding(item.getHitBox)) {
         item match {
           case _: Coconut => player.blackOut(10); Game.soundSystem.playSound(getSound(Sound.STUNNED))
+          case _: Confuser => player.confuse(10); Game.soundSystem.playSound(getSound(Sound.CONFUSE))
         }
         toRemove += item
       }

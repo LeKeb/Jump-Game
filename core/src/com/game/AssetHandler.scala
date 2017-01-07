@@ -29,6 +29,7 @@ object AssetHandler {
     val PARALLAX_BACKGROUND = "para"
     val PARALLAX_BACKGROUND2 = "para2"
     val WARNING = "warn"
+    val CONFUSER = "confuse"
   }
   
   object Sound {
@@ -37,6 +38,7 @@ object AssetHandler {
     val BOOST = "boost"
     val GAME_OVER = "gameOver"
     val STUNNED = "stun"
+    val CONFUSE = "conf"
   }
   
   object Music {
@@ -89,12 +91,14 @@ object AssetHandler {
     textures += Texture.PARALLAX_BACKGROUND -> loadTexture("parallaxBackground.png")
     textures += Texture.PARALLAX_BACKGROUND2 -> loadTexture("parallaxBackground2.png")
     textures += Texture.WARNING -> loadTexture("Warning.png")
+    textures += Texture.CONFUSER -> loadTexture("hypnosis.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")
     sounds += Sound.BOOST -> loadSound("boost.ogg")
     sounds += Sound.GAME_OVER -> loadSound("gameOver.ogg")
     sounds += Sound.STUNNED -> loadSound("stunned.ogg")
+    sounds += Sound.CONFUSE -> loadSound("portal.ogg")
     
     music += Music.GAME -> loadMusic("music2.ogg")
     music += Music.MENU -> loadMusic("music.ogg")

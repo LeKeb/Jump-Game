@@ -36,12 +36,14 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   private var isBlackedOut = false
   private var blackOutLeft = 0f
   
+  private var isConfused = false
+  private var confuseLeft = 0f
+  
   private var yAllTimeMax = yCoord
   private var yThisJumpHighest = yCoord
 
   def update(delta: Float) = {
-    //Testipätkä alla.
-
+    
     xCoord += xVelo * delta
     yCoord += yVelo * delta
     
@@ -65,21 +67,29 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     hitbox.setCoords(xCoord, yCoord)
     
     blackOutLeft -= delta / 60f
+    confuseLeft -= delta / 60f
     
     if (blackOutLeft <= 0)
       isBlackedOut = false
-
+    if (confuseLeft <= 0)
+      isConfused = false
+      
     //Pitää varmistaa, ettei pelaaja pääse ruudun ulkopuolelle. 
   }
 
-  //Hitbox
   
   def setXVelo(x: Float) = {
-    xVelo = Math.min( Math.max(x, -15), 15)
+    if (isConfused)
+      xVelo = -Math.min( Math.max(x, -15), 15)
+    else
+      xVelo = Math.min( Math.max(x, -15), 15)
   }
   
   def addXVelo(x: Float) = {
-    xVelo = Math.min( Math.max(xVelo + x, -15), 15)
+    if (isConfused)
+      xVelo = Math.min( Math.max(xVelo - x, -15), 15)
+    else
+      xVelo = Math.min( Math.max(xVelo + x, -15), 15)
   }
   
   def jump(multiplier: Float) {
@@ -109,6 +119,12 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   def blackOut(time: Float) = {
     isBlackedOut = true
     blackOutLeft = time
+  }
+  
+  def confuse(time: Float) = {
+    xVelo = 0
+    isConfused = true
+    confuseLeft = time
   }
   
 }

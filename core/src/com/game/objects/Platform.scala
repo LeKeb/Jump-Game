@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion
 import com.badlogic.gdx.graphics.Pixmap
 import com.game.physics.Hitbox
 import com.game.AssetHandler._
+import com.badlogic.gdx.math.Vector2
 
 abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
 
@@ -23,6 +24,8 @@ abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
   
   protected val hitbox = new Hitbox(x, y, w, h, pixmap)
   
+  protected var itemPos = new Vector2(xCoord, yCoord + height * 2)
+  
   def update(delta: Float)
   
   def highestPossibleJump: Float
@@ -37,4 +40,5 @@ abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
   
   def getHeight = height
   
+  def getItemPos = itemPos
 }

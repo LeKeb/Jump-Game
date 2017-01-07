@@ -25,8 +25,6 @@ class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
   private var xVelo = 0f
   private var yVelo = 0f
   
-  private var angle = 0f
-  
   private val cam = new OrthographicCamera(Camera.renderWidth, Camera.renderHeight)
   
   cam.position.set(Camera.renderWidth / 2, Camera.renderHeight / 2, 0)
@@ -45,7 +43,6 @@ class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
   def update(delta: Float): Unit = {
     xCoord += xVelo * delta
     yCoord += yVelo * delta
-    angle += 4f * delta
     
     yVelo = Math.max(yVelo - 1 * delta, -15)
     
