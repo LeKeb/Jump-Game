@@ -20,13 +20,13 @@ class GameWorld {
   
   private val platforms = Buffer[Platform]()
   private val items = Buffer[Item]()
-  private val player = new Player(Camera.renderWidth / 2 - 40, 50, 120, 120)
+  private val player = new Player(Camera.renderWidth / 2, 50, 120, 120)
   private var leftPressed = false
   private var rightPressed = false
   
   private val background = new Background
   
-  platforms += new NormalPlatform(-100, -30, Camera.renderWidth + 200, 60)
+  platforms += new NormalPlatform(Camera.renderWidth / 2, -30, Camera.renderWidth + 200, 60)
     
   def buttonChanged(left: Boolean, pressed: Boolean) = {
     if (left) {
@@ -50,11 +50,11 @@ class GameWorld {
       val rand = math.random
       val last = platforms.last
       if (rand < 0.05) {
-        platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
       } else if (rand < 0.15) {
-        platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
       } else {
-        platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
       }
       
       if (math.random < 0.04)

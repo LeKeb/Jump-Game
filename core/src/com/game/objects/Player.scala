@@ -99,9 +99,9 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   
   def draw(batch: SpriteBatch) = {
     if (!lookingLeft)
-      batch.draw(tex, xCoord, yCoord, width, height)
+      batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
     else
-      batch.draw(tex, xCoord + width, yCoord, -width, height)
+      batch.draw(tex, xCoord + width / 2, yCoord - height / 2, -width, height)
     if (isBlackedOut) 
       batch.draw(blackOut, xCoord + width / 2 - blackOut.getWidth / 2, yCoord + height / 2 - blackOut.getHeight / 2)
   }

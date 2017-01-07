@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Pixmap
 
 class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
   
-  private var xCoord = x
-  private var yCoord = y
+  private var xCoord = x - w / 2
+  private var yCoord = y - h / 2
   private var width = w
   private var height = h
   private var pixmap = pixm
@@ -36,8 +36,8 @@ class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
   }
   
   def setCoords(x: Float, y: Float) = {
-    xCoord = x
-    yCoord = y
+    xCoord = x - w / 2
+    yCoord = y - h / 2
   }
   
 }

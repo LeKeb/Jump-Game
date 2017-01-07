@@ -24,14 +24,14 @@ abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
   
   protected val hitbox = new Hitbox(x, y, w, h, pixmap)
   
-  protected var itemPos = new Vector2(xCoord, yCoord + height * 2)
+  protected var itemPos = new Vector2(xCoord, yCoord + height)
   
   def update(delta: Float)
   
   def highestPossibleJump: Float
   
   def draw(batch : SpriteBatch) = {
-    batch.draw(tex, xCoord, yCoord, width, height)
+    batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
   }
   
   def getHitBox = hitbox

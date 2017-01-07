@@ -26,7 +26,7 @@ class Confuser(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h) 
   }
   
   override def draw(batch: SpriteBatch) = {
-    batch.draw(tex, xCoord, yCoord, width / 2, height / 2, width, height, 1, 1, angle)
+    batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width / 2, height / 2, width, height, 1, 1, angle)
   }
   
 }

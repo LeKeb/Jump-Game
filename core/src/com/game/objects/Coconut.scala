@@ -31,11 +31,11 @@ class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
   cam.update()
   
   override def draw(batch: SpriteBatch) = {
-    batch.draw(tex, xCoord, yCoord, width, height)
+    batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
     if (yCoord > Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord) {
       val mat = batch.getProjectionMatrix.cpy()
       batch.setProjectionMatrix(cam.combined)
-      batch.draw(warnTex, xCoord + width / 2 - 16.5f, Camera.renderHeight - 120, 33, 100)
+      batch.draw(warnTex, xCoord - 16.5f, Camera.renderHeight - 120, 33, 100)
       batch.setProjectionMatrix(mat)
     }
   }
