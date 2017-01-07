@@ -18,16 +18,16 @@ class BreakablePlatform(x: Float, y: Float, w: Float, h: Float) extends Platform
   private val crackSound = AssetHandler.getSound(Sound.CRACK)
   
   private var broken: Boolean = false
-  private var leftX = xCoord
-  private var leftY = yCoord
-  private var rightX = xCoord
-  private var rightY = yCoord
-  private var leftXVelo = 0.toFloat
-  private var leftYVelo = 0.toFloat
-  private var rightXVelo = 0.toFloat
-  private var rightYVelo = 0.toFloat
-  private var leftRot = 0.toFloat
-  private var rightRot = 0.toFloat
+  private var leftX = xCoord - width / 2
+  private var leftY = yCoord - height / 2
+  private var rightX = xCoord - width / 2
+  private var rightY = yCoord - height / 2
+  private var leftXVelo = 0f
+  private var leftYVelo = 0f
+  private var rightXVelo = 0f
+  private var rightYVelo = 0f
+  private var leftRot = 0f
+  private var rightRot = 0f
   
   def highestPossibleJump = 75
   
@@ -51,7 +51,7 @@ class BreakablePlatform(x: Float, y: Float, w: Float, h: Float) extends Platform
       batch.draw(texLeft, leftX, leftY, width / 4, height / 2, width, height, 1, 1, leftRot)
       batch.draw(texRight, rightX, rightY, width * 3 / 4, height / 2, width, height, 1, 1, rightRot)
     } else {
-      batch.draw(tex, xCoord, yCoord, width, height)
+      batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
     }
   }
   
