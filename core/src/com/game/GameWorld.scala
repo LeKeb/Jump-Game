@@ -67,7 +67,7 @@ class GameWorld {
         items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
     }
     
-    if (Math.random() < 0.001) {
+    if (Math.random() < 0.005) {
       items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
     }
     

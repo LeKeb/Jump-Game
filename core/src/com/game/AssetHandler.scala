@@ -18,7 +18,6 @@ object AssetHandler {
     val PLAY_BUTTON = "playButton"
     val SLIDER_BACKGORUND = "sliderBack"
     val SLIDER_BUTTON = "sliderButt"
-    val BLACK_OUT = "black"
     val COCONUT = "coconut"
     val EXIT_BUTTON = "exit"
     val OPTIONS_BUTTON = "options"
@@ -32,6 +31,7 @@ object AssetHandler {
     val CONFUSER = "confuse"
     val FIRE = "fire"
     val FIRE_HITBOX = "fireHit"
+    val CIRCLE = "circ"
   }
   
   object Sound {
@@ -83,7 +83,6 @@ object AssetHandler {
     textures += Texture.PLAY_BUTTON -> loadTexture("PlayButton.png")
     textures += Texture.SLIDER_BACKGORUND -> loadTexture("SliderBack.png")
     textures += Texture.SLIDER_BUTTON -> loadTexture("SliderButton.png")
-    textures += Texture.BLACK_OUT -> loadTexture("BlackOut.png")
     textures += Texture.COCONUT -> loadTexture("coconut2.png")
     textures += Texture.EXIT_BUTTON -> loadTexture("ExitButton.png")
     textures += Texture.OPTIONS_BUTTON -> loadTexture("OptionsButton.png")
@@ -97,6 +96,7 @@ object AssetHandler {
     textures += Texture.CONFUSER -> loadTexture("hypnosis.png")
     textures += Texture.FIRE -> loadTexture("fireAnimation.png")
     textures += Texture.FIRE_HITBOX -> loadTexture("FireHitbox.png")
+    textures += Texture.CIRCLE -> loadTexture("Circle.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")

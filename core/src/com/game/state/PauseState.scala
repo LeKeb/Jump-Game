@@ -18,7 +18,7 @@ class PauseState extends State {
   
   private var gameInputProcessor: InputProcessor = _
   
-  private val background = new AtlasRegion(getTexture(Texture.BLACK_OUT), 0, 0, 1, 1)
+  private val background = new AtlasRegion(getTexture(Texture.BACKGROUND), 0, 0, 1, 1)
   
   private val optionUi = new OptionUi(this)
   

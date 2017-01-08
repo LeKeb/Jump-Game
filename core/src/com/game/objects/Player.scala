@@ -8,10 +8,10 @@ import com.game.AssetHandler._
 import com.badlogic.gdx.math.Vector2
 import com.game.physics.Hitbox
 import com.badlogic.gdx.graphics.Pixmap
+import scala.collection.mutable.Buffer
 
 class Player(x: Float, y: Float, w: Float, h: Float) {
   
-  private val blackOut = getTexture(Texture.BLACK_OUT)
   private val texture = getTexture(Texture.PLAYER)
   private val tex = new AtlasRegion(texture, 0, 0, 372, 364)
   
@@ -33,8 +33,7 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
 
   private var xx = 1.toFloat
   
-  private var isBlackedOut = false
-  private var blackOutLeft = 0f
+  private var blackOuts = Buffer[Float]()
   
   private var isConfused = false
   private var confuseLeft = 0f
@@ -50,7 +49,7 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     var multiplier = 1f
     
     if (isBurning)
-      multiplier = 2f
+      multiplier = 1.5f
     
     xCoord += xVelo * delta * multiplier
     yCoord += yVelo * delta * multiplier
@@ -74,12 +73,10 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     
     hitbox.setCoords(xCoord, yCoord)
     
-    blackOutLeft -= delta / 60f
+    blackOuts = blackOuts.map(_ -delta / 60f).filter(_ > 0)
     confuseLeft -= delta / 60f
     burnLeft -= delta / 60f
     
-    if (blackOutLeft <= 0)
-      isBlackedOut = false
     if (confuseLeft <= 0)
       isConfused = false
     if (burnLeft <= 0)
@@ -113,8 +110,6 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
       batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
     else
       batch.draw(tex, xCoord + width / 2, yCoord - height / 2, -width, height)
-    if (isBlackedOut) 
-      batch.draw(blackOut, xCoord + width / 2 - blackOut.getWidth / 2, yCoord + height / 2 - blackOut.getHeight / 2)
   }
 
   def getPos = new Vector2(xCoord, yCoord)
@@ -128,9 +123,10 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   def getThisJumpHighest = yThisJumpHighest
   
   def blackOut(time: Float) = {
-    isBlackedOut = true
-    blackOutLeft = time
+    blackOuts += time
   }
+  
+  def getBlackoutLevel = blackOuts.length
   
   def confuse(time: Float) = {
     xVelo = 0
