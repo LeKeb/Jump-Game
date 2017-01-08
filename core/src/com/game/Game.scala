@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.profiling.GL20Profiler
 import com.badlogic.gdx.graphics.GL30
-import com.badlogic.gdx.Game
 
 object Game {
   
