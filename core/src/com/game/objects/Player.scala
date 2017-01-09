@@ -9,11 +9,13 @@ import com.badlogic.gdx.math.Vector2
 import com.game.physics.Hitbox
 import com.badlogic.gdx.graphics.Pixmap
 import scala.collection.mutable.Buffer
+import com.game.Animation
 
 class Player(x: Float, y: Float, w: Float, h: Float) {
   
   private val texture = getTexture(Texture.PLAYER)
   private val tex = new AtlasRegion(texture, 0, 0, 372, 364)
+  private val fire = new Animation(getTexture(Texture.FIRE), 8, 8, 30)
   
   private val pixmap = new Pixmap(w.toInt, h.toInt, Pixmap.Format.RGBA8888)
   tex.getTexture.getTextureData.prepare()
@@ -84,8 +86,8 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
       isConfused = false
     if (burnLeft <= 0)
       isBurning = false
-      
-    //Pitää varmistaa, ettei pelaaja pääse ruudun ulkopuolelle. 
+    
+    fire.update(delta)
   }
 
   
@@ -113,6 +115,12 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
       batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
     else
       batch.draw(tex, xCoord + width / 2, yCoord - height / 2, -width, height)
+    if (isBurning) {
+      if (!lookingLeft)
+        batch.draw(fire.getImage, xCoord - width * 3 / 5, yCoord - height / 3, width * 9 / 10, height * 2f)
+      else
+        batch.draw(fire.getImage, xCoord + width * 3 / 5, yCoord - height / 3, -width * 9 / 10, height * 2f)
+    }
   }
 
   def getPos = new Vector2(xCoord, yCoord)
