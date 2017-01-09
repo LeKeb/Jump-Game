@@ -54,6 +54,9 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     xCoord += xVelo * delta * multiplier
     yCoord += yVelo * delta * multiplier
     
+    if (xCoord < 0) xCoord = 720
+    if (xCoord > 720) xCoord = 0
+    
     yVelo -= (1f * delta * multiplier)
     
     xVelo *= 0.9f
