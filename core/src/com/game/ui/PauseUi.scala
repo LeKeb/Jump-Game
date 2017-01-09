@@ -15,17 +15,17 @@ class PauseUi(state: State) extends Ui(state) {
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 7 / 8, 0, 0, "Paused")    
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 5 / 8, 375, 188, getTexture(Texture.RESUME_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 5 / 8, 400, 133.3f, getTexture(Texture.RESUME_BUTTON), false,
         () => (Game.gameState.resume())
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 3 / 8, 375, 188, getTexture(Texture.OPTIONS_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 3 / 8, 400, 133.3f, getTexture(Texture.OPTIONS_BUTTON), false,
         () => (parentState.asInstanceOf[PauseState].enterOptions())
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 375, 188, getTexture(Texture.EXIT_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 400, 133.3f, getTexture(Texture.EXIT_BUTTON),false ,
         () => (Game.game.enterState(Game.mainMenuState))
       )      
   )

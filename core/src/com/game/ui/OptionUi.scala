@@ -23,7 +23,7 @@ private object OptionUi {
 class OptionUi(state: State) extends Ui(state) {
   
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight / 3, 375, 188, getTexture(Texture.EXIT_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight / 3, 400, 133.3f, getTexture(Texture.EXIT_BUTTON), false,
         () => (
             if (parentState.isInstanceOf[MainMenuState])
               parentState.asInstanceOf[MainMenuState].exitOptions()
@@ -48,7 +48,10 @@ class OptionUi(state: State) extends Ui(state) {
   override def keyDown(key: Int): Boolean = {
     super.keyDown(key)
     if (key == Keys.ESCAPE || key == Keys.BACK) {
-      Game.game.enterState(Game.mainMenuState)
+      if (parentState.isInstanceOf[MainMenuState])
+        parentState.asInstanceOf[MainMenuState].exitOptions()
+      else
+        parentState.asInstanceOf[PauseState].exitOptions()
     }
     false
   }

@@ -20,17 +20,17 @@ class MainMenuUi(state: State) extends Ui(state) {
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 13 / 14, 0, 0, "Doodle Jump 3000")    
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 3 / 4, 375, 188, AssetHandler.getTexture(Texture.PLAY_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 3 / 4, 400, 133.3f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
         () => (Game.game.enterState(Game.gameState))    
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 2 / 4, 375, 188, AssetHandler.getTexture(Texture.OPTIONS_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 2 / 4, 400, 133.3f, AssetHandler.getTexture(Texture.OPTIONS_BUTTON), false,
         () => (parentState.asInstanceOf[MainMenuState].enterOptions())    
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 1 / 4, 375, 188, AssetHandler.getTexture(Texture.EXIT_BUTTON),
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 1 / 4, 400, 133.3f, AssetHandler.getTexture(Texture.EXIT_BUTTON), false,
         () => (Gdx.app.exit())    
       )      
   )
