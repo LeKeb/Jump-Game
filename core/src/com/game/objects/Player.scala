@@ -88,6 +88,9 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
       isBurning = false
     
     fire.update(delta)
+    if (confuseLeft > 0) {
+      lookingLeft = ((confuseLeft * 5).toInt % 2) == 1
+    }
   }
 
   
