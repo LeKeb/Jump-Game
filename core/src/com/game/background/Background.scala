@@ -15,6 +15,7 @@ class Background {
   private val parallax2 = getTexture(Texture.PARALLAX_BACKGROUND2)
   private val palm = new PalmTree(Camera.renderWidth / 2, 240, 100000)
   private val camera = new OrthographicCamera(Camera.renderWidth, Camera.renderHeight)
+  private val backTex2 = getTexture(Texture.BACKGROUND2)
   
   parallax.setWrap(TextureWrap.ClampToEdge, TextureWrap.Repeat)
   parallax2.setWrap(TextureWrap.ClampToEdge, TextureWrap.Repeat)
@@ -26,7 +27,7 @@ class Background {
     camera.update()
     batch.setProjectionMatrix(camera.combined)
     
-    batch.draw(backTex, 0, 0, Camera.renderWidth, Camera.renderHeight)
+    batch.draw(backTex2, 0, 0, Camera.renderWidth, Camera.renderHeight, 0, -(Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord / 55).toInt, backTex2.getWidth, backTex2.getHeight, false, false)
        
     batch.draw(parallax, 0, 0, Camera.renderWidth, Camera.renderHeight, 0, -(Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord / 50).toInt, parallax.getWidth, parallax.getHeight, false, false)
    
