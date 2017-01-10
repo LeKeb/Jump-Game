@@ -13,6 +13,7 @@ import com.game.ui.component.Slider
 import com.game.ui.component.TextView
 import com.game.state.State
 import com.game.state.MainMenuState
+import com.badlogic.gdx.Input.Keys
 
 class MainMenuUi(state: State) extends Ui(state) {
   
@@ -37,5 +38,12 @@ class MainMenuUi(state: State) extends Ui(state) {
         () => (parentState.asInstanceOf[MainMenuState].enterAbout())    
       )      
   )
-   
+  
+  override def keyDown(key: Int) = {
+    if (key == Keys.BACK || key == Keys.ESCAPE) {
+      Gdx.app.exit()
+    }
+    false
+  }
+  
 }

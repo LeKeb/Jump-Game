@@ -24,7 +24,6 @@ object AssetHandler {
     val RESUME_BUTTON = "resume"
     val PALM_TREE_TRUNK = "trunk"
     val PALM_TREE_TOP = "top"
-    val BACKGROUND = "back"
     val PARALLAX_BACKGROUND = "para"
     val PARALLAX_BACKGROUND2 = "para2"
     val WARNING = "warn"
@@ -96,7 +95,6 @@ object AssetHandler {
     textures += Texture.RESUME_BUTTON -> loadTexture("Button_resume.png")
     textures += Texture.PALM_TREE_TOP -> loadTexture("palmTreeTop.png")
     textures += Texture.PALM_TREE_TRUNK -> loadTexture("palmTreeTrunk.png")
-    textures += Texture.BACKGROUND -> loadTexture("Background.png")
     textures += Texture.PARALLAX_BACKGROUND -> loadTexture("parallaxBackground.png")
     textures += Texture.PARALLAX_BACKGROUND2 -> loadTexture("parallaxBackground2.png")
     textures += Texture.WARNING -> loadTexture("Warning.png")

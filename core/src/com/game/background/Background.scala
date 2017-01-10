@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap
 
 class Background {
   
-  private val backTex = getTexture(Texture.BACKGROUND)
   private val parallax = getTexture(Texture.PARALLAX_BACKGROUND)
   private val parallax2 = getTexture(Texture.PARALLAX_BACKGROUND2)
   private val palm = new PalmTree(Camera.renderWidth / 2, 240, 100000)
