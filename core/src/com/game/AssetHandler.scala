@@ -36,7 +36,8 @@ object AssetHandler {
     val BACKGROUND2 = "back2"
     val CHALK_BOARD = "chalkb"
     val ABOUT_BUTTON = "about"
-    val ARROW = "arrow"
+    val ARROW_LEFT = "left"
+    val ARROW_RIGHT = "right"
   }
   
   object Sound {
@@ -107,7 +108,8 @@ object AssetHandler {
     textures += Texture.BACKGROUND2 -> loadTexture("background2.png")
     textures += Texture.CHALK_BOARD -> loadTexture("Board.png")
     textures += Texture.ABOUT_BUTTON -> loadTexture("Button_help.png")
-    textures += Texture.ARROW -> loadTexture("arrow.png")
+    textures += Texture.ARROW_LEFT -> loadTexture("ArrowLeft.png")
+    textures += Texture.ARROW_RIGHT -> loadTexture("ArrowRight.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")
