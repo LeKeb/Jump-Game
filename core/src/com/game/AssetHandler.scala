@@ -32,6 +32,7 @@ object AssetHandler {
     val FIRE = "fire"
     val FIRE_HITBOX = "fireHit"
     val CIRCLE = "circ"
+    val START_VIEW = "startView"
   }
   
   object Sound {
@@ -97,6 +98,7 @@ object AssetHandler {
     textures += Texture.FIRE -> loadTexture("fireAnimation.png")
     textures += Texture.FIRE_HITBOX -> loadTexture("FireHitbox.png")
     textures += Texture.CIRCLE -> loadTexture("Circle.png")
+    textures += Texture.START_VIEW -> loadTexture("startView.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")

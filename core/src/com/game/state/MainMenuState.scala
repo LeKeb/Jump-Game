@@ -6,6 +6,9 @@ import com.badlogic.gdx.Gdx
 import com.game.Game
 import com.game.AssetHandler
 import com.game.ui.OptionUi
+import com.game.AssetHandler.Texture
+import com.game.Camera
+
 
 class MainMenuState extends State {
   
@@ -14,6 +17,8 @@ class MainMenuState extends State {
   private val optionUi = new OptionUi(this)
   
   private var isInOptions = false
+  
+  private val startView = AssetHandler.getTexture(Texture.START_VIEW)
   
   override def enter() = {
     Gdx.input.setInputProcessor(ui)
@@ -29,6 +34,8 @@ class MainMenuState extends State {
   }
   
   override def drawUi(batch: SpriteBatch) = {
+   
+    batch.draw(startView, 0, 0, Camera.renderWidth, Camera.renderHeight)
     if (isInOptions)
       optionUi.draw(batch)
     else
