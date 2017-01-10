@@ -26,7 +26,7 @@ class AboutUi(state: State) extends Ui(state) {
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 8 / 28, 0, 0, "and falling coconuts!", getFont(Font.CHALK)),
       
      
-      new Button(Camera.renderWidth / 2, Camera.renderHeight / 10, 400, 133.3f, getTexture(Texture.COCONUT), false,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 200, 133.3f, getTexture(Texture.ARROW), false,
         () => (
             changeUi(1)
             )
@@ -48,7 +48,7 @@ class AboutUi(state: State) extends Ui(state) {
       
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 8 / 28, 0, 0, "Project", getFont(Font.CHALK)),
       
-      new Button(Camera.renderWidth / 2, Camera.renderHeight / 10, 400, 133.3f, getTexture(Texture.CONFUSER), false,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 200, 133.3f, getTexture(Texture.ARROW), false,
         () => {
             changeUi(2)
           }
@@ -69,7 +69,7 @@ class AboutUi(state: State) extends Ui(state) {
       
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 8 / 28, 0, 0, "Freesound.org", getFont(Font.CHALK)),
       
-      new Button(Camera.renderWidth / 2, Camera.renderHeight / 10, 400, 133.3f, getTexture(Texture.PALM_TREE_TRUNK), false,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 200, 133.3f, getTexture(Texture.ARROW), false,
         () => {
             changeUi(0)
             parentState.asInstanceOf[MainMenuState].exitAbout()
