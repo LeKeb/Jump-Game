@@ -38,7 +38,11 @@ class MainMenuUi(state: State) extends Ui(state) {
         () => (parentState.asInstanceOf[MainMenuState].enterAbout())    
       )      
   )
-  
+  addComponent(
+      new Button(418, 1192, 124, 84, AssetHandler.getTexture(Texture.M), false,
+        () => (println("SHHH!"))    
+      )      
+  )
   override def keyDown(key: Int) = {
     if (key == Keys.BACK || key == Keys.ESCAPE) {
       Gdx.app.exit()
