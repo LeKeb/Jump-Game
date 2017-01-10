@@ -34,6 +34,8 @@ object AssetHandler {
     val CIRCLE = "circ"
     val START_VIEW = "startView"
     val BACKGROUND2 = "back2"
+    val CHALK_BOARD = "chalkb"
+    val ABOUT_BUTTON = "about"
   }
   
   object Sound {
@@ -53,6 +55,7 @@ object AssetHandler {
   
   object Font {
     val DEFAULT = "def"
+    val CHALK = "chalk"
   }
   
   private val textures: HashMap[String, Texture] = new HashMap[String, Texture]()
@@ -101,6 +104,8 @@ object AssetHandler {
     textures += Texture.CIRCLE -> loadTexture("Circle.png")
     textures += Texture.START_VIEW -> loadTexture("startView.png")
     textures += Texture.BACKGROUND2 -> loadTexture("background2.png")
+    textures += Texture.CHALK_BOARD -> loadTexture("Board.png")
+    textures += Texture.ABOUT_BUTTON -> loadTexture("Button_help.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")
@@ -114,6 +119,7 @@ object AssetHandler {
     music += Music.MENU -> loadMusic("music.ogg")
     
     fonts += Font.DEFAULT -> loadFont("default.fnt")
+    fonts += Font.CHALK -> loadFont("font.fnt")
   }
   
   def getTexture(texture: String) = {

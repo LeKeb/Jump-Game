@@ -18,18 +18,23 @@ class MainMenuUi(state: State) extends Ui(state) {
   
   
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 16 / 21, 460, 133.3f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 32 / 42, 460, 133.3f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
         () => (Game.game.enterState(Game.gameState))    
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 13 / 21, 460, 133.3f, AssetHandler.getTexture(Texture.OPTIONS_BUTTON), false,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 18 / 42, 460, 133.3f, AssetHandler.getTexture(Texture.OPTIONS_BUTTON), false,
         () => (parentState.asInstanceOf[MainMenuState].enterOptions())    
       )      
   )
   addComponent(
       new Button(Camera.renderWidth * 7 / 19, Camera.renderHeight * 1 / 4, 492, 133.3f, AssetHandler.getTexture(Texture.EXIT_BUTTON), false,
         () => (Gdx.app.exit())    
+      )      
+  )
+  addComponent(
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 25 / 42, 460, 133.3f, AssetHandler.getTexture(Texture.ABOUT_BUTTON), false,
+        () => (parentState.asInstanceOf[MainMenuState].enterAbout())    
       )      
   )
    

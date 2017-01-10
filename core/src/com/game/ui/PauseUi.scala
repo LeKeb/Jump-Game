@@ -12,7 +12,7 @@ import com.game.state.PauseState
 class PauseUi(state: State) extends Ui(state) {
   
   addComponent(
-      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 7 / 8, 0, 0, "Paused")    
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 7 / 8, 0, 0, "Paused", null)    
   )
   addComponent(
       new Button(Camera.renderWidth / 2, Camera.renderHeight * 5 / 8, 400, 133.3f, getTexture(Texture.RESUME_BUTTON), false,

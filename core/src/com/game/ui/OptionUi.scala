@@ -36,13 +36,13 @@ class OptionUi(state: State) extends Ui(state) {
       OptionUi.soundSlider
   )
   addComponent(
-      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 3 / 4, 0, 0, "Sound level:")    
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 3 / 4, 0, 0, "Sound level:", null)    
   )
   addComponent(
       OptionUi.musicSlider
   )
   addComponent(
-      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 53 / 60, 0, 0, "Music level:")
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 53 / 60, 0, 0, "Music level:", null)
   )
   
   override def keyDown(key: Int): Boolean = {
