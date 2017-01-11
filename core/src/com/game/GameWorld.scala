@@ -19,6 +19,7 @@ import com.game.objects.Fire
 import com.game.objects.Fire
 import com.game.objects.Fire
 
+
 class GameWorld {
   
   private val platforms = Buffer[Platform]()
@@ -49,26 +50,88 @@ class GameWorld {
   
   def update(delta: Float) = {
     
+    def scoreATM = (player.getAllTimeHighestYCoord / 10).toInt
+    
     while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
+    
       val rand = math.random
       val last = platforms.last
-      if (rand < 0.05) {
-        platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
-      } else if (rand < 0.15 || items.exists(_.isInstanceOf[Fire]) || player.burning) {
-        platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
-      } else {
-        platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
-      }
       
       val rand2 = math.random
-      if (rand2 < 0.04)
-        items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
-      else if (rand2 < 0.08 && platforms.last.isInstanceOf[NormalPlatform])
-        items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
+      
+      if (scoreATM > 5000) {
+        
+        platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+      
+      } else if (scoreATM > 4000) {
+        
+        if (rand < 0.05) {
+          platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        } else if (rand < 0.30) {  
+            platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)     
+        } else {
+          platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        }
+      
+        if (rand2 < 0.04)
+          items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
+        else if (rand2 < 0.08 && platforms.last.isInstanceOf[NormalPlatform])
+          items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
+        
+      } else if (scoreATM > 2000) {
+      
+        if (rand < 0.05) {
+          platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        } else if (rand < 0.20 || items.exists(_.isInstanceOf[Fire]) || player.burning) {
+          if (math.random < 0.4) {
+            platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+          } else {
+            platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+          }      
+        } else {
+          platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        }
+      
+        if (rand2 < 0.02)
+          items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
+        else if (rand2 < 0.08 && platforms.last.isInstanceOf[NormalPlatform])
+          items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
+        
+      } else {
+       
+        if (rand < 0.05) {
+          platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        } else if (rand < 0.15 || items.exists(_.isInstanceOf[Fire]) || player.burning) {
+          if (math.random < 0.5) {
+            platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+          } else {
+            platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+          }      
+        } else {
+          platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
+        }
+      
+        if (rand2 < 0.01)
+          items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
+        else if (rand2 < 0.06 && platforms.last.isInstanceOf[NormalPlatform])
+          items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
+      
+      }
     }
     
-    if (Math.random() < 0.005) {
-      items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
+    
+    if (scoreATM > 4000) {
+      if (Math.random() < 0.004) {
+        items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
+      }
+    } else if (scoreATM > 2000) {
+      if (Math.random() < 0.002) {
+        items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
+      }
+    } else {
+      if (Math.random() < 0.001) {
+        items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
+      }
     }
     
     if (leftPressed)
