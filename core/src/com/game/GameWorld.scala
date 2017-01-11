@@ -113,7 +113,7 @@ class GameWorld {
       
         if (rand2 < 0.01)
           items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
-        else if (rand2 < 0.06 && platforms.last.isInstanceOf[NormalPlatform])
+        else if (rand2 < 0.05 && platforms.last.isInstanceOf[NormalPlatform])
           items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
       
       }
