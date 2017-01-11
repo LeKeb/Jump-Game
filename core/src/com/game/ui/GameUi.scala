@@ -15,9 +15,16 @@ import com.game.state.GameState
 
 class GameUi(state: State) extends Ui(state) {
   
-  val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 19 / 20, 0, 0, "0", null)
+  val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 19 / 20, 0, 0, "0", getFont(Font.DIGIT))
   
   addComponent(scoreView)
+  
+  addComponent(new Button(
+      Camera.renderWidth / 6, Camera.renderHeight * 23 / 25, Camera.renderWidth / 8, Camera.renderWidth / 8, getTexture(Texture.PAUSE_BUTTON), false,
+      () => (parentState.asInstanceOf[GameState].pause())
+    )
+  
+  )
   
   override def keyDown(key: Int): Boolean = {
     super.keyDown(key)

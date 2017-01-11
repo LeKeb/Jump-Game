@@ -10,6 +10,7 @@ import com.game.physics.Hitbox
 import com.badlogic.gdx.graphics.Pixmap
 import scala.collection.mutable.Buffer
 import com.game.Animation
+import com.game.Camera
 
 class Player(x: Float, y: Float, w: Float, h: Float) {
   
@@ -56,8 +57,10 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     xCoord += xVelo * delta * multiplier
     yCoord += yVelo * delta * multiplier
     
-    if (xCoord < 0) xCoord = 720
-    if (xCoord > 720) xCoord = 0
+    if (xCoord + width / 2 < 0) 
+      xCoord = Camera.renderWidth + width / 2
+    if (xCoord - width / 2 > Camera.renderWidth)
+      xCoord = -width / 2
     
     yVelo -= (1f * delta * multiplier)
     

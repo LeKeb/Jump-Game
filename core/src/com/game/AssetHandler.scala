@@ -38,6 +38,7 @@ object AssetHandler {
     val ARROW_LEFT = "left"
     val ARROW_RIGHT = "right"
     val M = "m"
+    val PAUSE_BUTTON = "pause"
   }
   
   object Sound {
@@ -58,6 +59,7 @@ object AssetHandler {
   object Font {
     val DEFAULT = "def"
     val CHALK = "chalk"
+    val DIGIT = "dig"
   }
   
   private val textures: HashMap[String, Texture] = new HashMap[String, Texture]()
@@ -105,11 +107,12 @@ object AssetHandler {
     textures += Texture.CIRCLE -> loadTexture("Circle.png")
     textures += Texture.START_VIEW -> loadTexture("startView.png")
     textures += Texture.BACKGROUND2 -> loadTexture("background2.png")
-    textures += Texture.CHALK_BOARD -> loadTexture("Board.png")
-    textures += Texture.ABOUT_BUTTON -> loadTexture("Button_help.png")
+    textures += Texture.CHALK_BOARD -> loadTexture("Chalckboard_big.png")
+    textures += Texture.ABOUT_BUTTON -> loadTexture("Button_about.png")
     textures += Texture.ARROW_LEFT -> loadTexture("ArrowLeft.png")
     textures += Texture.ARROW_RIGHT -> loadTexture("ArrowRight.png")
     textures += Texture.M -> loadTexture("M.png")
+    textures += Texture.PAUSE_BUTTON -> loadTexture("Button_pause.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")
@@ -124,6 +127,7 @@ object AssetHandler {
     
     fonts += Font.DEFAULT -> loadFont("default.fnt")
     fonts += Font.CHALK -> loadFont("font.fnt")
+    fonts += Font.DIGIT -> loadFont("digits.fnt")
   }
   
   def getTexture(texture: String) = {
