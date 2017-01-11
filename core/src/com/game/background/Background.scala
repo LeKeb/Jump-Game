@@ -10,12 +10,13 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap
 
 class Background {
   
-  private val backTex = getTexture(Texture.BACKGROUND)
   private val parallax = getTexture(Texture.PARALLAX_BACKGROUND)
   private val parallax2 = getTexture(Texture.PARALLAX_BACKGROUND2)
   private val palm = new PalmTree(Camera.renderWidth / 2, 240, 100000)
   private val camera = new OrthographicCamera(Camera.renderWidth, Camera.renderHeight)
+  private val backTex2 = getTexture(Texture.BACKGROUND2)
   
+  backTex2.setWrap(TextureWrap.ClampToEdge, TextureWrap.Repeat)
   parallax.setWrap(TextureWrap.ClampToEdge, TextureWrap.Repeat)
   parallax2.setWrap(TextureWrap.ClampToEdge, TextureWrap.Repeat)
   
@@ -26,7 +27,7 @@ class Background {
     camera.update()
     batch.setProjectionMatrix(camera.combined)
     
-    batch.draw(backTex, 0, 0, Camera.renderWidth, Camera.renderHeight)
+    batch.draw(backTex2, 0, 0, Camera.renderWidth, Camera.renderHeight, 0, -Camera.renderHeight.toInt / 2 -(Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord / 100).toInt, backTex2.getWidth, Camera.renderHeight.toInt / 2, false, false)
        
     batch.draw(parallax, 0, 0, Camera.renderWidth, Camera.renderHeight, 0, -(Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord / 50).toInt, parallax.getWidth, parallax.getHeight, false, false)
    
@@ -40,7 +41,7 @@ class Background {
     camera.update()
     batch.setProjectionMatrix(camera.combined)
     
-    batch.draw(parallax2, 0, 0, Camera.renderWidth, Camera.renderHeight, 0, -(Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord * 4 / 5).toInt, parallax.getWidth, parallax.getHeight, false, false)
+    batch.draw(parallax2, 0, 0, Camera.renderWidth, Camera.renderHeight, 0, -(Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord * 2 / 3).toInt, parallax.getWidth, parallax.getHeight, false, false)
     
     batch.setProjectionMatrix(mat)
   }

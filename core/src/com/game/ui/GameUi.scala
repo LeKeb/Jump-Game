@@ -15,7 +15,7 @@ import com.game.state.GameState
 
 class GameUi(state: State) extends Ui(state) {
   
-  val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 19 / 20, 0, 0, "0")
+  val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 19 / 20, 0, 0, "0", null)
   
   addComponent(scoreView)
   

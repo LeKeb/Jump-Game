@@ -6,9 +6,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.game.AssetHandler._
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 
-class TextView(x: Float, y: Float, w: Float, h: Float, t: String) extends Component(x, y, w, h) {
+class TextView(x: Float, y: Float, w: Float, h: Float, t: String, f: BitmapFont) extends Component(x, y, w, h) {
   
-  private val font = getFont(Font.DEFAULT)
+  private val font =
+    if (f == null)
+      getFont(Font.DEFAULT)
+     else
+       f
   private val layout = new GlyphLayout(font, t)
   private var text = t;
   

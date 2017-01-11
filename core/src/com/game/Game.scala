@@ -41,8 +41,7 @@ class Game extends ApplicationAdapter {
     camera = new Camera
     Game.game = this
     Game.soundSystem = new SoundSystem
-    currentState = Game.mainMenuState
-    currentState.enter()
+    enterState(Game.mainMenuState)
     
     val vert = Gdx.files.internal("Shaders/blurShader.vert").readString()
     val frag = Gdx.files.internal("Shaders/blurShader.frag").readString()
@@ -161,7 +160,8 @@ class Game extends ApplicationAdapter {
   }
   
   def enterState(state: State) = {
-    this.currentState.exit()
+    if (this.currentState != null)
+      this.currentState.exit()
     this.currentState = state
     currentState.enter()
     Gdx.input.setCatchBackKey(true)

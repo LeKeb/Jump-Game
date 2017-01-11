@@ -13,26 +13,41 @@ import com.game.ui.component.Slider
 import com.game.ui.component.TextView
 import com.game.state.State
 import com.game.state.MainMenuState
+import com.badlogic.gdx.Input.Keys
 
 class MainMenuUi(state: State) extends Ui(state) {
   
+  
   addComponent(
-      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 13 / 14, 0, 0, "Doodle Jump 3000")    
-  )
-  addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 3 / 4, 400, 133.3f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 33 / 42, 420, 133.3f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
         () => (Game.game.enterState(Game.gameState))    
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 2 / 4, 400, 133.3f, AssetHandler.getTexture(Texture.OPTIONS_BUTTON), false,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 19 / 42, 420, 133.3f, AssetHandler.getTexture(Texture.OPTIONS_BUTTON), false,
         () => (parentState.asInstanceOf[MainMenuState].enterOptions())    
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 1 / 4, 400, 133.3f, AssetHandler.getTexture(Texture.EXIT_BUTTON), false,
+      new Button(Camera.renderWidth * 7 / 19, Camera.renderHeight * 1 / 4, 492, 133.3f, AssetHandler.getTexture(Texture.EXIT_BUTTON), false,
         () => (Gdx.app.exit())    
       )      
   )
-   
+  addComponent(
+      new Button(Camera.renderWidth / 2, Camera.renderHeight * 26 / 42, 420, 133.3f, AssetHandler.getTexture(Texture.ABOUT_BUTTON), false,
+        () => (parentState.asInstanceOf[MainMenuState].enterAbout())    
+      )      
+  )
+  addComponent(
+      new Button(418, 1192, 124, 84, AssetHandler.getTexture(Texture.M), false,
+        () => (println("SHHH!"))    
+      )      
+  )
+  override def keyDown(key: Int) = {
+    if (key == Keys.BACK || key == Keys.ESCAPE) {
+      Gdx.app.exit()
+    }
+    false
+  }
+  
 }

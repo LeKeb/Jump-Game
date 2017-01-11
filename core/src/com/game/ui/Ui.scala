@@ -63,7 +63,8 @@ abstract class Ui(state: State) extends InputProcessor {
   def touchUp(x: Int, y: Int, pointer: Int, button: Int): Boolean = {
     val point = Utils.screenCoordToGameCoord(new Vector2(x, Gdx.graphics.getHeight - y))
     for (comp <- components) {
-      comp.touchUp(point)
+      if (comp != null)
+        comp.touchUp(point)
     }
     false
   }
