@@ -109,7 +109,6 @@ class GameWorld {
     if (player.getAllTimeHighestYCoord - 120 - (player.getPos.y) > Camera.renderHeight) {
       //Game over
       Game.soundSystem.playSound(getSound(Sound.GAME_OVER))
-      //Display the Game over-screen here
       Game.game.enterState(Game.mainMenuState)
     }
   }

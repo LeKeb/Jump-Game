@@ -24,7 +24,6 @@ object AssetHandler {
     val RESUME_BUTTON = "resume"
     val PALM_TREE_TRUNK = "trunk"
     val PALM_TREE_TOP = "top"
-    val BACKGROUND = "back"
     val PARALLAX_BACKGROUND = "para"
     val PARALLAX_BACKGROUND2 = "para2"
     val WARNING = "warn"
@@ -32,7 +31,13 @@ object AssetHandler {
     val FIRE = "fire"
     val FIRE_HITBOX = "fireHit"
     val CIRCLE = "circ"
-    val GAME_OVER = "gameOver"
+    val START_VIEW = "startView"
+    val BACKGROUND2 = "back2"
+    val CHALK_BOARD = "chalkb"
+    val ABOUT_BUTTON = "about"
+    val ARROW_LEFT = "left"
+    val ARROW_RIGHT = "right"
+    val M = "m"
   }
   
   object Sound {
@@ -52,6 +57,7 @@ object AssetHandler {
   
   object Font {
     val DEFAULT = "def"
+    val CHALK = "chalk"
   }
   
   private val textures: HashMap[String, Texture] = new HashMap[String, Texture]()
@@ -90,7 +96,6 @@ object AssetHandler {
     textures += Texture.RESUME_BUTTON -> loadTexture("Button_resume.png")
     textures += Texture.PALM_TREE_TOP -> loadTexture("palmTreeTop.png")
     textures += Texture.PALM_TREE_TRUNK -> loadTexture("palmTreeTrunk.png")
-    textures += Texture.BACKGROUND -> loadTexture("Background.png")
     textures += Texture.PARALLAX_BACKGROUND -> loadTexture("parallaxBackground.png")
     textures += Texture.PARALLAX_BACKGROUND2 -> loadTexture("parallaxBackground2.png")
     textures += Texture.WARNING -> loadTexture("Warning.png")
@@ -98,7 +103,13 @@ object AssetHandler {
     textures += Texture.FIRE -> loadTexture("fireAnimation.png")
     textures += Texture.FIRE_HITBOX -> loadTexture("FireHitbox.png")
     textures += Texture.CIRCLE -> loadTexture("Circle.png")
-    textures += Texture.GAME_OVER -> loadTexture("game_over.png")
+    textures += Texture.START_VIEW -> loadTexture("startView.png")
+    textures += Texture.BACKGROUND2 -> loadTexture("background2.png")
+    textures += Texture.CHALK_BOARD -> loadTexture("Board.png")
+    textures += Texture.ABOUT_BUTTON -> loadTexture("Button_help.png")
+    textures += Texture.ARROW_LEFT -> loadTexture("ArrowLeft.png")
+    textures += Texture.ARROW_RIGHT -> loadTexture("ArrowRight.png")
+    textures += Texture.M -> loadTexture("M.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")
@@ -112,6 +123,7 @@ object AssetHandler {
     music += Music.MENU -> loadMusic("music.ogg")
     
     fonts += Font.DEFAULT -> loadFont("default.fnt")
+    fonts += Font.CHALK -> loadFont("font.fnt")
   }
   
   def getTexture(texture: String) = {
