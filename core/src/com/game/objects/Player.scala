@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Pixmap
 import scala.collection.mutable.Buffer
 import com.game.Animation
 import com.game.Camera
+import com.game.Utils
 
 class Player(x: Float, y: Float, w: Float, h: Float) {
   
@@ -21,8 +22,9 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   private val pixmap = new Pixmap(w.toInt, h.toInt, Pixmap.Format.RGBA8888)
   tex.getTexture.getTextureData.prepare()
   pixmap.drawPixmap(tex.getTexture.getTextureData.consumePixmap(), 0, 0, texture.getWidth, texture.getHeight, 0, 0, w.toInt, h.toInt)
-  
-  private val hitbox = new Hitbox(x, y, w, h, pixmap)
+    
+  private val rightHitbox = new Hitbox(x, y, w, h, pixmap)
+  private val leftHitbox = new Hitbox(x, y, w, h, Utils.flipPixmap(pixmap, true, false))
   
   private var xCoord = x
   private var yCoord = y
@@ -79,7 +81,8 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     yThisJumpHighest = Math.max(yCoord, yThisJumpHighest)
     yAllTimeMax = Math.max(yCoord, yAllTimeMax)
     
-    hitbox.setCoords(xCoord, yCoord)
+    rightHitbox.setCoords(xCoord, yCoord)
+    leftHitbox.setCoords(xCoord, yCoord)
     
     blackOuts = blackOuts.map(_ -delta / 60f).filter(_ > 0)
     confuseLeft -= delta / 60f
@@ -133,7 +136,12 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   
   def getVelo = new Vector2(xVelo, yVelo)
   
-  def getHitBox = hitbox
+  def getHitBox = {
+    if (lookingLeft)
+      leftHitbox
+    else
+      rightHitbox
+  }
   
   def getAllTimeHighestYCoord = yAllTimeMax
   

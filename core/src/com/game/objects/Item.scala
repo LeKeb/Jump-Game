@@ -17,7 +17,7 @@ abstract class Item(x: Float, y: Float, w: Float, h: Float) {
   def update(delta: Float)
   
   def draw(batch : SpriteBatch) = {
-    batch.draw(tex, xCoord, yCoord, width, height)
+    batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
   }
   
   def getHitBox = hitbox

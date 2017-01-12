@@ -18,11 +18,11 @@ abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
   protected var tex = new AtlasRegion(t, 0, 0, t.getWidth, t.getHeight)
   
   private val texture = tex.getTexture
-  protected val pixmap = new Pixmap(w.toInt, h.toInt, Pixmap.Format.RGBA8888)
+  private val pixmap = new Pixmap(w.toInt, h.toInt, Pixmap.Format.RGBA8888)
   texture.getTextureData.prepare()
   pixmap.drawPixmap(tex.getTexture.getTextureData.consumePixmap(), 0, 0, texture.getWidth, texture.getHeight, 0, 0, w.toInt, h.toInt)
   
-  protected val hitbox = new Hitbox(x, y, w, h, pixmap)
+  protected var hitbox = new Hitbox(x, y, w, h, pixmap)
   
   protected var itemPos = new Vector2(xCoord, yCoord + height)
   

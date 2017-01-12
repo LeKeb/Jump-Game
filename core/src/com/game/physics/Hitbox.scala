@@ -2,6 +2,7 @@ package com.game.physics
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.Pixmap
+import com.game.Utils
 
 class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
   
@@ -9,7 +10,7 @@ class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
   private var yCoord = y - h / 2
   private var width = w
   private var height = h
-  private var pixmap = pixm
+  private var pixmap = Utils.flipPixmap(pixm, false, true)
   
   def isColliding(hb: Hitbox): Boolean = {
     if ((xCoord + width <= hb.xCoord || xCoord > hb.xCoord + hb.width) ||
