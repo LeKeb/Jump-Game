@@ -114,6 +114,11 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
       xVelo = Math.min( Math.max(xVelo + x, -15), 15)
   }
   
+  def move(x: Float, y: Float) = {
+    xCoord += x
+    yCoord += y
+  }
+  
   def jump(multiplier: Float) {
     yThisJumpHighest = yCoord
     yVelo = 30f * multiplier
@@ -131,7 +136,9 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
         batch.draw(fire.getImage, xCoord + width * 3 / 5, yCoord - height / 3, -width * 9 / 10, height * 2f)
     }
   }
-
+  
+  def getHeight = height
+  
   def getPos = new Vector2(xCoord, yCoord)
   
   def getVelo = new Vector2(xVelo, yVelo)
