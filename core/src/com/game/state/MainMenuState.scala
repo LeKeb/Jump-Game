@@ -10,22 +10,23 @@ import com.game.AssetHandler.Texture
 import com.game.Camera
 import com.game.ui.Ui
 import com.game.ui.AboutUi
-
+import com.game.ui.StatsUi
+import com.game.PreferenceHandler._
 
 class MainMenuState extends State {
   
   private val ui = new MainMenuUi(this)
   
   private val optionUi = new OptionUi(this)
-  
   private val aboutUi = new AboutUi(this)
-  
-  private var isInOptions = false
+  private val statsUi = new StatsUi(this)
   
   private val startView = AssetHandler.getTexture(Texture.START_VIEW)
-  private val aboutBack = AssetHandler.getTexture(Texture.CHALK_BOARD)
+  private val menuBack = AssetHandler.getTexture(Texture.CHALK_BOARD)
   
+  private var isInOptions = false
   private var isInAbout = false
+  private var isInStats = false
   
   override def enter() = {
     Gdx.input.setInputProcessor(ui)
@@ -43,11 +44,14 @@ class MainMenuState extends State {
   override def drawUi(batch: SpriteBatch) = {
    
     batch.draw(startView, 0, 0, Camera.renderWidth, Camera.renderHeight)
-    if (isInOptions)
+    if (isInOptions) {
       optionUi.draw(batch)
-    else if (isInAbout) {
-      batch.draw(aboutBack, Camera.renderWidth / 20, Camera.renderHeight / 20, Camera.renderWidth * 9 / 10, Camera.renderHeight * 4 / 5)
+    } else if (isInAbout) {
+      batch.draw(menuBack, Camera.renderWidth / 20, Camera.renderHeight / 20, Camera.renderWidth * 9 / 10, Camera.renderHeight * 4 / 5)
       aboutUi.draw(batch)
+    } else if (isInStats) {
+      batch.draw(menuBack, Camera.renderWidth / 20, Camera.renderHeight / 20, Camera.renderWidth * 9 / 10, Camera.renderHeight * 4 / 5)
+      statsUi.draw(batch)
     }
     else
       ui.draw(batch)
@@ -75,6 +79,24 @@ class MainMenuState extends State {
   def exitAbout() = {
     Gdx.input.setInputProcessor(ui)
     isInAbout = false
+  }
+  
+  def enterStats() = {
+    Gdx.input.setInputProcessor(statsUi)
+    isInStats = true
+    statsUi.highscore.setText(Preferences.highscore.toString())
+    statsUi.playTimes.setText(Preferences.timesPlayed.toString())
+    var time = Preferences.timePlayed
+    val hours = time / 3600
+    time -= hours * 3600
+    val minutes = time / 60
+    time -= minutes * 60
+    statsUi.playTime.setText(hours + "h  " + minutes + "m  " + time + "s")
+  }
+  
+  def exitStats() = {
+    Gdx.input.setInputProcessor(ui)
+    isInStats = false
   }
   
 }

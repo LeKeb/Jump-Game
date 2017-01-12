@@ -19,12 +19,12 @@ class MainMenuUi(state: State) extends Ui(state) {
   
   
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 33 / 42, 420, 133.3f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
+      new Button(Camera.renderWidth * 2 / 3, Camera.renderHeight * 33 / 42, 300, 100f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
         () => (Game.game.enterState(Game.gameState))    
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 19 / 42, 420, 133.3f, AssetHandler.getTexture(Texture.OPTIONS_BUTTON), false,
+      new Button(Camera.renderWidth * 2 / 3, Camera.renderHeight * 28 / 42, 300, 100f, AssetHandler.getTexture(Texture.OPTIONS_BUTTON), false,
         () => (parentState.asInstanceOf[MainMenuState].enterOptions())    
       )      
   )
@@ -34,8 +34,13 @@ class MainMenuUi(state: State) extends Ui(state) {
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight * 26 / 42, 420, 133.3f, AssetHandler.getTexture(Texture.ABOUT_BUTTON), false,
+      new Button(Camera.renderWidth * 2 / 3, Camera.renderHeight * 18 / 42, 300, 100f, AssetHandler.getTexture(Texture.ABOUT_BUTTON), false,
         () => (parentState.asInstanceOf[MainMenuState].enterAbout())    
+      )      
+  )
+  addComponent(
+      new Button(Camera.renderWidth * 2 / 3, Camera.renderHeight * 23 / 42, 300, 100f, AssetHandler.getTexture(Texture.COCONUT), false,
+        () => (parentState.asInstanceOf[MainMenuState].enterStats())    
       )      
   )
   addComponent(

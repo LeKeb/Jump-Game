@@ -10,9 +10,9 @@ import com.game.Game
 
 class GameOverUi(state: State) extends Ui(state) {
   
-  val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 12 / 20, 0, 0, "0", getFont(Font.CHALK72))
+  val scoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 12 / 20, 0, 0, "0", getFont(Font.CHALK))
   
-  val hiScoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 8 / 20, 0, 0, "0", getFont(Font.CHALK72))
+  val hiScoreView = new TextView(Camera.renderWidth / 2, Camera.renderHeight * 8 / 20, 0, 0, "0", getFont(Font.CHALK))
   
   addComponent(new TextView(Camera.renderWidth / 2, Camera.renderHeight * 17 / 20, 0, 0, "Game Over!", getFont(Font.CHALK72)))
   
