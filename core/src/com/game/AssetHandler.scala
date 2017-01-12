@@ -86,9 +86,9 @@ object AssetHandler {
   
   def loadAssets() = {
     textures += Texture.PLAYER -> loadTexture("player.png")
-    textures += Texture.NORMAL_PLATFORM -> loadTexture("Platf_normal_skateb.png")
+    textures += Texture.NORMAL_PLATFORM -> loadTexture("Platf_normal_red_flipped.png")
     textures += Texture.BOOST_PLATFORM -> loadTexture("Platf_boost.png")
-    textures += Texture.BREAKABLE_PLATFORM -> loadTexture("Platf_breakable.png")
+    textures += Texture.BREAKABLE_PLATFORM -> loadTexture("Platf_breakable_bright.png")
     textures += Texture.BREAKABLE_PLATFORM_BROKEN -> loadTexture("Platf_broken.png")
     textures += Texture.PLAY_BUTTON -> loadTexture("Button_play.png")
     textures += Texture.SLIDER_BACKGORUND -> loadTexture("Slider.png")
