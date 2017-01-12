@@ -10,12 +10,13 @@ import com.game.ui.component.TextView
 import com.game.state.State
 import com.game.state.MainMenuState
 import com.game.state.PauseState
+import com.game.PreferenceHandler._
 
 private object OptionUi {
-  val soundSlider = new Slider(Camera.renderWidth / 2, Camera.renderHeight / 2, 500, 60, 0, 100, 25, 
+  val soundSlider = new Slider(Camera.renderWidth / 2, Camera.renderHeight / 2, 500, 60, 0, 100, Preferences.soundVolume, 25, 
         (i: Int) => (Game.soundSystem.setSoundVolume(i))
       )
-  val musicSlider = new Slider(Camera.renderWidth / 2, Camera.renderHeight * 2 / 3, 500, 60, 0, 100, 25, 
+  val musicSlider = new Slider(Camera.renderWidth / 2, Camera.renderHeight * 2 / 3, 500, 60, 0, 100, Preferences.musicVolume, 25, 
         (i: Int) => (Game.soundSystem.setMusicVolume(i))
       )
 }

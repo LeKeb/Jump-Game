@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.game.AssetHandler._
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
+import com.badlogic.gdx.graphics.Color
 
 class TextView(x: Float, y: Float, w: Float, h: Float, t: String, f: BitmapFont) extends Component(x, y, w, h) {
   
@@ -13,6 +14,7 @@ class TextView(x: Float, y: Float, w: Float, h: Float, t: String, f: BitmapFont)
       getFont(Font.DEFAULT)
      else
        f
+       
   private val layout = new GlyphLayout(font, t)
   private var text = t;
   
@@ -23,6 +25,7 @@ class TextView(x: Float, y: Float, w: Float, h: Float, t: String, f: BitmapFont)
   
   
   def draw(batch: SpriteBatch): Unit = {
+    font.setColor(batch.getColor)
     val textWidth = layout.width
     font.draw(batch, text, x - textWidth / 2, y)
   }

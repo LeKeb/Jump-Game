@@ -3,6 +3,7 @@ package com.game
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.audio.Music
+import com.game.PreferenceHandler.Preferences
 
 class SoundSystem {
   
@@ -34,10 +35,12 @@ class SoundSystem {
     musicVolume = volume
     if (musicPlaying != null)
       musicPlaying.setVolume(musicVolume / 100f)
+    Preferences.musicVolume = volume
   }
   
   def setSoundVolume(volume: Int) = {
     soundVolume = volume
+    Preferences.soundVolume = volume
   }
   
 }

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.Color
 
-class Slider(x: Float, y: Float, w: Float, h: Float, min: Int, max: Int, spacing: Int, func: (Int) => Unit) extends Component(x, y, w, h) {
+class Slider(x: Float, y: Float, w: Float, h: Float, min: Int, max: Int, start: Int, spacing: Int, func: (Int) => Unit) extends Component(x, y, w, h) {
   
   private val minVal = min
   private val maxVal = max
@@ -14,7 +14,7 @@ class Slider(x: Float, y: Float, w: Float, h: Float, min: Int, max: Int, spacing
   private val backTex = getTexture(Texture.SLIDER_BACKGORUND)
   private val buttTex = getTexture(Texture.SLIDER_BUTTON)
   
-  private var value = max
+  private var value = start
   private var isTouching = false
   
   def draw(batch: SpriteBatch): Unit = {

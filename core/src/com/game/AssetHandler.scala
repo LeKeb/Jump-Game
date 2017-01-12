@@ -59,6 +59,7 @@ object AssetHandler {
   object Font {
     val DEFAULT = "def"
     val CHALK = "chalk"
+    val CHALK72 = "chalk72"
     val DIGIT = "dig"
   }
   
@@ -127,6 +128,7 @@ object AssetHandler {
     
     fonts += Font.DEFAULT -> loadFont("default.fnt")
     fonts += Font.CHALK -> loadFont("font.fnt")
+    fonts += Font.CHALK72 -> loadFont("font72.fnt")
     fonts += Font.DIGIT -> loadFont("digits.fnt")
   }
   

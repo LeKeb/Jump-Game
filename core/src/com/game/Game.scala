@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.profiling.GL20Profiler
 import com.badlogic.gdx.graphics.GL30
+import com.game.PreferenceHandler._
 
 object Game {
   
@@ -38,9 +39,13 @@ class Game extends ApplicationAdapter {
   override def create() = {
     batch = new SpriteBatch
     AssetHandler.loadAssets()
+    PreferenceHandler.loadPreferences()
+    
     camera = new Camera
     Game.game = this
     Game.soundSystem = new SoundSystem
+    Game.soundSystem.setMusicVolume(Preferences.musicVolume)
+    Game.soundSystem.setSoundVolume(Preferences.soundVolume)
     enterState(Game.mainMenuState)
     
     val vert = Gdx.files.internal("Shaders/blurShader.vert").readString()
@@ -165,6 +170,10 @@ class Game extends ApplicationAdapter {
     this.currentState = state
     currentState.enter()
     Gdx.input.setCatchBackKey(true)
+  }
+  
+  override def dispose() = {
+    PreferenceHandler.savePreferences()
   }
   
 }

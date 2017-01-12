@@ -30,6 +30,8 @@ class GameWorld {
   
   private val background = new Background
   
+  private var gameOver = false
+  
   platforms += new NormalPlatform(Camera.renderWidth / 2, -30, Camera.renderWidth + 200, 60)
   
   def buttonChanged(left: Boolean, pressed: Boolean) = {
@@ -50,8 +52,6 @@ class GameWorld {
   
   def update(delta: Float) = {
     
-    def scoreATM = (player.getAllTimeHighestYCoord / 10).toInt
-    
     while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
     
       val rand = math.random
@@ -59,11 +59,11 @@ class GameWorld {
       
       val rand2 = math.random
       
-      if (scoreATM > 5000) {
+      if (getScore > 5000) {
         
         platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
       
-      } else if (scoreATM > 4000) {
+      } else if (getScore > 4000) {
         
         if (rand < 0.05) {
           platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
@@ -78,7 +78,7 @@ class GameWorld {
         else if (rand2 < 0.08 && platforms.last.isInstanceOf[NormalPlatform])
           items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 75, 200, 200)
         
-      } else if (scoreATM > 2000) {
+      } else if (getScore > 2000) {
       
         if (rand < 0.05) {
           platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, last.getY + ((last.highestPossibleJump - 80) * Math.random() + 80).toFloat, 200, 40)
@@ -120,11 +120,11 @@ class GameWorld {
     }
     
     
-    if (scoreATM > 4000) {
+    if (getScore > 4000) {
       if (Math.random() < 0.004) {
         items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
       }
-    } else if (scoreATM > 2000) {
+    } else if (getScore > 2000) {
       if (Math.random() < 0.002) {
         items += new Coconut((Math.random() * (Camera.renderWidth - 100)).toFloat, player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
       }
@@ -170,9 +170,9 @@ class GameWorld {
     if (player.getAllTimeHighestYCoord - 120 - (platforms.head.getY + platforms.head.getHeight) > Camera.renderHeight / 2)
       platforms.remove(0)
     if (player.getAllTimeHighestYCoord - 120 - (player.getPos.y) > Camera.renderHeight) {
-      //Game over
+      Game.soundSystem.stopMusic()
       Game.soundSystem.playSound(getSound(Sound.GAME_OVER))
-      Game.game.enterState(Game.mainMenuState)
+      gameOver = true
     }
   }
   
@@ -184,5 +184,9 @@ class GameWorld {
   }
   
   def getPlayer = player
+  
+  def isGameOver = gameOver
+  
+  def getScore = (player.getAllTimeHighestYCoord / 10).toInt
   
 }
