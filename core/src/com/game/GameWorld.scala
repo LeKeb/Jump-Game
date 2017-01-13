@@ -31,6 +31,7 @@ class GameWorld(hard: Boolean) {
   
   private val background = new Background
   
+  private var gameRendered = 0
   private var gameOver = false
   
   platforms += new NormalPlatform(Camera.renderWidth / 2, -30, Camera.renderWidth + 200, 60)
@@ -75,15 +76,15 @@ class GameWorld(hard: Boolean) {
       while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
     
         val rand = math.random //to generate platforms
-        def last = platforms.last
+        var last = platforms.last
       
         val rand2 = math.random //to generate items
       
         val break = (math.log10(last.getY / 10 * 3 - 3000) - 2) / 10
         val boost = (math.log10(last.getY / 10 * 3 - 6000) - 2) / 50
       
-        def minDistVar = (last.highestPossibleJump * 4 / 5 * (getScore / 50000).min(1))
-        def nextY = (last.getY + last.highestPossibleJump / 5f + minDistVar + ((last.highestPossibleJump * 4f / 5f - minDistVar) * (math.random * (math.pow(1.01, last.getY / 10 / 100)) / 3).min(1))).toFloat
+        var minDistVar = (last.highestPossibleJump * 4 / 5 * (getScore / 50000).min(1))
+        var nextY = (last.getY + last.highestPossibleJump / 5f + minDistVar + ((last.highestPossibleJump * 4f / 5f - minDistVar) * (math.random * (math.pow(1.01, last.getY / 10 / 100)) / 3).min(1))).toFloat
       
         if (rand < break) {
           platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
@@ -91,6 +92,9 @@ class GameWorld(hard: Boolean) {
           platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
         } else if (rand < boost + break + 0.01) {
           for (i <- 0 until (math.random * getScore / 1000f).toInt) {
+            last = platforms.last
+            minDistVar = (last.highestPossibleJump * 4 / 5 * (getScore / 50000).min(1))
+            nextY = (last.getY + last.highestPossibleJump / 5f + minDistVar + ((last.highestPossibleJump * 4f / 5f - minDistVar) * (math.random * (math.pow(1.01, last.getY / 10 / 100)) / 3).min(1))).toFloat
             platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
           }
         } else {
@@ -116,9 +120,11 @@ class GameWorld(hard: Boolean) {
     if (rightPressed)
       player.addXVelo(2)
     
-    items.foreach(_.update(delta))
-    platforms.foreach(_.update(delta))
-    player.update(delta)
+    if (gameRendered > 5) {
+      items.foreach(_.update(delta))
+      platforms.foreach(_.update(delta))
+      player.update(delta)
+    }
     
     for (plat <- platforms) {
       if (player.getVelo.y < 0 && player.getHitBox.isColliding(plat.getHitBox) && player.getThisJumpHighest - player.getHeight / 2 > plat.getY + plat.getHeight / 2) {
@@ -160,6 +166,7 @@ class GameWorld(hard: Boolean) {
     platforms.foreach(_.draw(batch))
     items.foreach(_.draw(batch))
     player.draw(batch)
+    gameRendered += 1
   }
   
   def getPlayer = player
