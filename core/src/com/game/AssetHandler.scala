@@ -105,7 +105,7 @@ object AssetHandler {
     textures += Texture.CONFUSER -> loadTexture("hypnosis.png")
     textures += Texture.FIRE -> loadTexture("fireAnimation.png")
     textures += Texture.FIRE_HITBOX -> loadTexture("FireHitbox.png")
-    textures += Texture.CIRCLE -> loadTexture("Circle.png")
+    textures += Texture.CIRCLE -> loadTexture("Circle2.png")
     textures += Texture.START_VIEW -> loadTexture("startView.png")
     textures += Texture.BACKGROUND2 -> loadTexture("background2.png")
     textures += Texture.CHALK_BOARD -> loadTexture("Chalckboard_big.png")

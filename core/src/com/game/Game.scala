@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.profiling.GL20Profiler
 import com.badlogic.gdx.graphics.GL30
 import com.game.PreferenceHandler._
+import com.game.AssetHandler._
 
 object Game {
   
@@ -35,6 +36,7 @@ class Game extends ApplicationAdapter {
   private var fbo1: FrameBuffer = _
   private var fbo2: FrameBuffer = _
   
+  private var circleTexture: Texture = _
   
   override def create() = {
     batch = new SpriteBatch
@@ -69,6 +71,8 @@ class Game extends ApplicationAdapter {
     fbo2 = new FrameBuffer(Pixmap.Format.RGBA8888, 720, 1280, false)
     
     Gdx.gl.glEnable(GL20.GL_BLEND)
+    
+    circleTexture = AssetHandler.getTexture(AssetHandler.Texture.CIRCLE)
   }
 
   override def render() = {
@@ -86,7 +90,6 @@ class Game extends ApplicationAdapter {
     
       Gdx.gl.glClearColor(0, 0.7.toFloat, 1, 1);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      Gdx.gl.glClear(GL20.GL_ALPHA_BITS);
       
       batch.setProjectionMatrix(camera.getCamera.combined)
     
@@ -117,18 +120,23 @@ class Game extends ApplicationAdapter {
       camera.update()
       batch.setProjectionMatrix(camera.getCamera.combined)
       
-      batch.setBlendFunction(GL20.GL_ZERO, GL20.GL_SRC_ALPHA)
-      val t = AssetHandler.getTexture(AssetHandler.Texture.CIRCLE)
+      
       fbo1.begin()
-      batch.draw(t, Game.gameState.getGame.getPlayer.getPos.x - t.getWidth / 2, Game.gameState.getGame.getPlayer.getPos.y - t.getHeight / 2)
+      Gdx.gl.glColorMask(false, false, false, true)
+      Gdx.gl.glClearColor(0, 0, 0, 0)
+      Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+      batch.draw(circleTexture, Game.gameState.getGame.getPlayer.getPos.x - circleTexture.getWidth / 2, Game.gameState.getGame.getPlayer.getPos.y - circleTexture.getHeight / 2)
       batch.flush()
+      Gdx.gl.glColorMask(true, true, true, true)
       fbo1.end()
       
       camera.setPosition(Camera.renderWidth / 2 , Camera.renderHeight / 2)
       camera.update()
       batch.setProjectionMatrix(camera.getCamera.combined)
       
-      batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
+      Gdx.gl.glClearColor(0, 0, 0, 1)
+      Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+      
       batch.setShader(blurShader)
       blurShader.setUniformf("dir", 0f, 1f);
       batch.draw(fbo2.getColorBufferTexture, 0, 0)
@@ -143,7 +151,6 @@ class Game extends ApplicationAdapter {
       
       Gdx.gl.glClearColor(0, 0.7.toFloat, 1, 1);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      Gdx.gl.glClear(GL20.GL_ALPHA_BITS);
       
       batch.setProjectionMatrix(camera.getCamera.combined)
       
