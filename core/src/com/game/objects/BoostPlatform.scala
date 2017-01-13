@@ -17,7 +17,7 @@ class BoostPlatform(x: Float, y: Float, w: Float, h: Float) extends Platform(x, 
   
   hitbox = new Hitbox(x, y, w, h, pixmap)
   
-  def highestPossibleJump = 1000
+  def highestPossibleJump = 440
   
   def update(delta: Float) = {
 
