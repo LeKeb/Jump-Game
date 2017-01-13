@@ -70,7 +70,7 @@ class GameState extends State {
       gameOverUi.scoreView.setText(game.getScore.toString())
       gameOverUi.hiScoreView.setText(Preferences.highscore.toString())
     } else if (game.isGameOver) {
-      gameOverAlpha += (delta / 60) / 2
+      gameOverAlpha += (delta / 60)
     }
   }
   

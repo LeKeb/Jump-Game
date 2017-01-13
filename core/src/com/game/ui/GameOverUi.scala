@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.game.ui.component.Button
 import com.game.AssetHandler._
 import com.game.Game
+import com.badlogic.gdx.Input.Keys
 
 class GameOverUi(state: State) extends Ui(state) {
   
@@ -33,5 +34,13 @@ class GameOverUi(state: State) extends Ui(state) {
       () => (Game.game.enterState(Game.mainMenuState)) 
     )
   )
+  
+  override def keyDown(key: Int): Boolean = {
+    super.keyDown(key)
+    if (key == Keys.ESCAPE || key == Keys.BACK) {
+      Game.game.enterState(Game.mainMenuState)
+    }
+    false
+  }
   
 }
