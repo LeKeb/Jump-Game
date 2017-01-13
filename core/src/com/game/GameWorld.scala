@@ -144,8 +144,8 @@ class GameWorld {
     player.update(delta)
     
     for (plat <- platforms) {
-      val collision = player.getHitBox.getCollision(plat.getHitBox)
-      if (collision != null && player.getVelo.y < 0 && player.getThisJumpHighest - player.getHeight / 2 > plat.getY + plat.getHeight / 2) {
+      if (player.getVelo.y < 0 && player.getHitBox.isColliding(plat.getHitBox) && player.getThisJumpHighest - player.getHeight / 2 > plat.getY + plat.getHeight / 2) {
+        val collision = player.getHitBox.getCollision(plat.getHitBox)
         player.move(0, collision.y2 - collision.y1)
         plat match {
           case _: NormalPlatform => player.jump(1); Game.soundSystem.playSound(getSound(Sound.JUMP))
@@ -157,8 +157,7 @@ class GameWorld {
     
     val toRemove = Buffer[Item]()
     for (item <- items) {
-      val collision = player.getHitBox.getCollision(item.getHitBox)
-      if (collision != null) {
+      if (player.getHitBox.isColliding(item.getHitBox)) {
         item match {
           case _: Coconut => player.blackOut(10); Game.soundSystem.playSound(getSound(Sound.STUNNED)); toRemove += item
           case _: Confuser => player.confuse(10); Game.soundSystem.playSound(getSound(Sound.CONFUSE)); toRemove += item
