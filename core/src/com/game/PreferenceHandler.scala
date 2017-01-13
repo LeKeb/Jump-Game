@@ -11,6 +11,8 @@ object PreferenceHandler {
     var timesPlayed = 0
     var soundVolume = 0
     var musicVolume = 0
+    var hardcorePlayed = false
+    var hardcoreHighscore = 0
   }
   
   private var prefs: Preferences = _
@@ -22,6 +24,8 @@ object PreferenceHandler {
     Preferences.timePlayed = prefs.getInteger("TimePlayed", 0)
     Preferences.soundVolume = prefs.getInteger("Sound", 75).min(100).max(0)
     Preferences.musicVolume = prefs.getInteger("Music", 75).min(100).max(0)
+    Preferences.hardcoreHighscore = prefs.getInteger("HardcoreHigh", 0)
+    Preferences.hardcorePlayed = prefs.getBoolean("HardcorePlayed", false)
   }
   
   def savePreferences() = {
@@ -30,6 +34,8 @@ object PreferenceHandler {
     prefs.putInteger("TimePlayed", Preferences.timePlayed)
     prefs.putInteger("Sound", Preferences.soundVolume)
     prefs.putInteger("Music", Preferences.musicVolume)
+    prefs.putInteger("HardcoreHigh", Preferences.hardcoreHighscore)
+    prefs.putBoolean("HardcorePlayed", Preferences.hardcorePlayed)
     prefs.flush()
   }
   

@@ -20,13 +20,14 @@ import com.game.objects.Fire
 import com.game.objects.Fire
 
 
-class GameWorld {
+class GameWorld(hard: Boolean) {
   
   private val platforms = Buffer[Platform]()
   private val items = Buffer[Item]()
   private val player = new Player(Camera.renderWidth / 2, 100, 120, 120)
   private var leftPressed = false
   private var rightPressed = false
+  private val hardcore = hard
   
   private val background = new Background
   
@@ -52,42 +53,63 @@ class GameWorld {
   
   def update(delta: Float) = {
     
-    while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
-    
-      val rand = math.random //to generate platforms
-      def last = platforms.last
+    if (hardcore) {
       
-      val rand2 = math.random //to generate items
-      
-      val break = (math.log10(last.getY / 10 * 3 - 3000) - 2) / 10
-      val boost = (math.log10(last.getY / 10 * 3 - 6000) - 2) / 50
-      
-      def minDistVar = (last.highestPossibleJump * 4 / 5 * (getScore / 50000).min(1))
-      def nextY = (last.getY + last.highestPossibleJump / 5f + minDistVar + ((last.highestPossibleJump * 4f / 5f - minDistVar) * (math.random * (math.pow(1.01, last.getY / 10 / 100)) / 3).min(1))).toFloat
-      
-      if (rand < break) {
-        platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
-      } else if (rand < boost + break) {
-        platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
-      } else if (rand < boost + break + 0.01) {
-        for (i <- 0 until (math.random * getScore / 1000f).toInt) {
-          platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
-        }
-      } else {
-        platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
+      while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
+        if (math.random < 0.05)
+          platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, platforms.last.getY + platforms.last.highestPossibleJump - 40, 200, 40)
+        else
+          platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, platforms.last.getY + platforms.last.highestPossibleJump - 40, 200, 40)
+        
+        if (math.random < 0.05)
+          items += new Confuser(platforms.last.getItemPos.x, platforms.last.getItemPos.y, 80, 80)
+        
       }
       
-      val confuse = (0.01 + 0.02 * ((last.getY / 10 - 10000) / 50000)) / 2
-      val fire = confuse * 2
+      if (math.random < 0.05)
+        items += new Coconut((50f + math.random * (Camera.renderWidth - 50)).toFloat , player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
       
-      if (last.getY / 10 > 10000 && rand2 < confuse)
-        items += new Confuser(last.getItemPos.x, last.getItemPos.y, 80, 80)
-      else if (last.getY / 10 > 6000 && rand2 < confuse + fire && !last.isInstanceOf[BreakablePlatform])
-        items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 70, 200, 200)
-    }
+      player.burn(10)
+      
+    } else {
+      while (platforms.last.getY < player.getPos.y + Camera.renderHeight) {
     
-    if (getScore > 1000 && math.random < (0.001 + (getScore / 200000f) * 0.1))
-      items += new Coconut((50f + math.random * (Camera.renderWidth - 50)).toFloat , player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
+        val rand = math.random //to generate platforms
+        def last = platforms.last
+      
+        val rand2 = math.random //to generate items
+      
+        val break = (math.log10(last.getY / 10 * 3 - 3000) - 2) / 10
+        val boost = (math.log10(last.getY / 10 * 3 - 6000) - 2) / 50
+      
+        def minDistVar = (last.highestPossibleJump * 4 / 5 * (getScore / 50000).min(1))
+        def nextY = (last.getY + last.highestPossibleJump / 5f + minDistVar + ((last.highestPossibleJump * 4f / 5f - minDistVar) * (math.random * (math.pow(1.01, last.getY / 10 / 100)) / 3).min(1))).toFloat
+      
+        if (rand < break) {
+          platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
+        } else if (rand < boost + break) {
+          platforms += new BoostPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
+        } else if (rand < boost + break + 0.01) {
+          for (i <- 0 until (math.random * getScore / 1000f).toInt) {
+            platforms += new BreakablePlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
+          }
+        } else {
+          platforms += new NormalPlatform((math.random * (Camera.renderWidth - 200)).toFloat + 100, nextY, 200, 40)
+        }
+      
+        val confuse = (0.01 + 0.02 * ((last.getY / 10 - 10000) / 50000)) / 2
+        val fire = confuse * 2
+      
+        if (last.getY / 10 > 10000 && rand2 < confuse)
+          items += new Confuser(last.getItemPos.x, last.getItemPos.y, 80, 80)
+        else if (last.getY / 10 > 6000 && rand2 < confuse + fire && !last.isInstanceOf[BreakablePlatform])
+          items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 70, 200, 200)
+      }
+    
+      if (getScore > 1000 && math.random < (0.001 + (getScore / 200000f) * 0.1))
+        items += new Coconut((50f + math.random * (Camera.renderWidth - 50)).toFloat , player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
+      
+    }
     
     if (leftPressed)
       player.addXVelo(-2)

@@ -18,7 +18,7 @@ class GameState extends State {
   
   private val ui = new GameUi(this)
   private val gameOverUi = new GameOverUi(this)
-  private var game = new GameWorld
+  private var game = new GameWorld(false)
   
   private val background = new AtlasRegion(getTexture(Texture.BACKGROUND2), 0, 0, 1, 1)
   private val board = AssetHandler.getTexture(Texture.CHALK_BOARD)
@@ -30,11 +30,13 @@ class GameState extends State {
   
   private var playTime = 0f
   
+  private var hardcore = false
+  
   def getGame = game
   
   override def enter() = {
     Gdx.input.setInputProcessor(ui)
-    game = new GameWorld
+    game = new GameWorld(hardcore)
     Game.soundSystem.loopMusic(getMusic(Music.GAME))
     gameOverRegistered = false
     gameOverAlpha = 0f
@@ -61,14 +63,22 @@ class GameState extends State {
     }
     if (game.isGameOver && !gameOverRegistered) {
       
-      Preferences.highscore = game.getScore.max(Preferences.highscore)
+      if (hardcore) {
+        Preferences.hardcoreHighscore = game.getScore.max(Preferences.hardcoreHighscore)
+        Preferences.hardcorePlayed = true 
+      }
+      else
+        Preferences.highscore = game.getScore.max(Preferences.highscore)
       Preferences.timePlayed += playTime.toInt
       Preferences.timesPlayed += 1
       
       gameOverRegistered = true
       Gdx.input.setInputProcessor(gameOverUi)
       gameOverUi.scoreView.setText(game.getScore.toString())
-      gameOverUi.hiScoreView.setText(Preferences.highscore.toString())
+      if (hardcore)
+        gameOverUi.hiScoreView.setText(Preferences.hardcoreHighscore.toString() + " (hardcore)")
+      else
+        gameOverUi.hiScoreView.setText(Preferences.highscore.toString())
     } else if (game.isGameOver) {
       gameOverAlpha += (delta / 60)
     }
@@ -105,6 +115,10 @@ class GameState extends State {
   def resume() = {
     isPaused = false
     pauseState.exit()
+  }
+  
+  def setHardcore(hard: Boolean) = {
+    this.hardcore = hard
   }
   
 }

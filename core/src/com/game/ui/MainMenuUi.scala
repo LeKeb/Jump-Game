@@ -20,7 +20,10 @@ class MainMenuUi(state: State) extends Ui(state) {
   
   addComponent(
       new Button(Camera.renderWidth * 2 / 3, Camera.renderHeight * 33 / 42, 300, 100f, AssetHandler.getTexture(Texture.PLAY_BUTTON), false,
-        () => (Game.game.enterState(Game.gameState))    
+        () => {
+          Game.gameState.setHardcore(false)
+          Game.game.enterState(Game.gameState)
+        }
       )      
   )
   addComponent(
@@ -45,7 +48,10 @@ class MainMenuUi(state: State) extends Ui(state) {
   )
   addComponent(
       new Button(418, 1192, 124, 84, AssetHandler.getTexture(Texture.M), false,
-        () => (println("SHHH!"))    
+        () => {
+          Game.gameState.setHardcore(true)
+          Game.game.enterState(Game.gameState)
+        }    
       )      
   )
   override def keyDown(key: Int) = {

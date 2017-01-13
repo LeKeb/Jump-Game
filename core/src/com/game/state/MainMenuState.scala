@@ -84,7 +84,10 @@ class MainMenuState extends State {
   def enterStats() = {
     Gdx.input.setInputProcessor(statsUi)
     isInStats = true
-    statsUi.highscore.setText(Preferences.highscore.toString())
+    if (Preferences.hardcorePlayed)
+      statsUi.highscore.setText(Preferences.highscore.toString() + " (" + Preferences.hardcoreHighscore.toString() + ")")
+    else
+      statsUi.highscore.setText(Preferences.highscore.toString())
     statsUi.playTimes.setText(Preferences.timesPlayed.toString())
     var time = Preferences.timePlayed
     val hours = time / 3600
