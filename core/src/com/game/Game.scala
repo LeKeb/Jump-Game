@@ -176,4 +176,7 @@ class Game extends ApplicationAdapter {
     PreferenceHandler.savePreferences()
   }
   
+  override def pause () = {
+    PreferenceHandler.savePreferences()
+  }
 }
