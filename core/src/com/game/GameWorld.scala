@@ -138,7 +138,7 @@ class GameWorld(hard: Boolean) {
         item match {
           case _: Coconut => player.blackOut(10); Game.soundSystem.playSound(getSound(Sound.STUNNED)); toRemove += item
           case _: Confuser => player.confuse(10); Game.soundSystem.playSound(getSound(Sound.CONFUSE)); toRemove += item
-          case _: Fire => player.burn(10); Game.soundSystem.playSound(getSound(Sound.SCREAM))
+          case _: Fire => player.burn(8); Game.soundSystem.playSound(getSound(Sound.SCREAM))
         }
       }
       if (player.getAllTimeHighestYCoord - 120 - (item.getY + item.getHeight) > Camera.renderHeight / 2)
