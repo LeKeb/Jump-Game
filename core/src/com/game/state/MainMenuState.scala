@@ -94,7 +94,7 @@ class MainMenuState extends State {
     time -= hours * 3600
     val minutes = time / 60
     time -= minutes * 60
-    statsUi.playTime.setText(hours + "h  " + minutes + "m  " + time + "s")
+    statsUi.playTime.setText(hours + " h  " + minutes + " m  " + time + " s")
   }
   
   def exitStats() = {
