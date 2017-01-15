@@ -15,8 +15,11 @@ import com.badlogic.gdx.graphics.GL30
 import com.game.PreferenceHandler._
 import com.game.AssetHandler._
 
+/**
+ * The main class of the whole game
+ */
 object Game {
-  
+  //some universally gettable variables
   var game: Game = _
   var soundSystem: SoundSystem = _
   val gameState = new GameState
@@ -26,18 +29,21 @@ object Game {
 
 class Game extends ApplicationAdapter {
 
-  private var batch: SpriteBatch = _
+  private var batch: SpriteBatch = _ //all the drawing is done with this
   private var camera: Camera = _
   private var currentState: State = _
   
-  private var defaultShader: ShaderProgram = _
-  private var blurShader: ShaderProgram = _
+  private var defaultShader: ShaderProgram = _ //the default shader provided by libgdx
+  private var blurShader: ShaderProgram = _ //the blur shader, used for blurring
   
-  private var fbo1: FrameBuffer = _
+  private var fbo1: FrameBuffer = _ //frame buffers to be used when blurring
   private var fbo2: FrameBuffer = _
   
-  private var circleTexture: Texture = _
+  private var circleTexture: Texture = _ //the circle to be left out of the blurring
   
+  /**
+   * Initialises the whole game
+   */
   override def create() = {
     batch = new SpriteBatch
     AssetHandler.loadAssets()
@@ -74,18 +80,25 @@ class Game extends ApplicationAdapter {
     
     circleTexture = AssetHandler.getTexture(AssetHandler.Texture.CIRCLE)
   }
-
+  
+  /**
+   * Renders and updates the game
+   */
   override def render() = {
     
-    val delta = Gdx.graphics.getDeltaTime * 60
+    val delta = Gdx.graphics.getDeltaTime * 60 //the amount the game should be updated relative to the standard run speed (60fps)
     
-    currentState.update(delta)
+    currentState.update(delta) //update the current state
     
     camera.setPosition(Camera.renderWidth / 2, Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord - 120)
     camera.update()
     
+    /**
+     * HC rendering stuff
+     */
     if (Game.gameState.getGame.getPlayer.getBlackoutLevel > 0 && currentState == Game.gameState) {
       
+      //Draws the game first regularly, the applies blur in one direction and then to the other
       fbo1.begin()
     
       Gdx.gl.glClearColor(0, 0.7.toFloat, 1, 1);
@@ -120,7 +133,7 @@ class Game extends ApplicationAdapter {
       camera.update()
       batch.setProjectionMatrix(camera.getCamera.combined)
       
-      
+      //get the circle that should not be blurred when drawn to screen
       fbo1.begin()
       Gdx.gl.glColorMask(false, false, false, true)
       Gdx.gl.glClearColor(0, 0, 0, 0)
@@ -148,7 +161,7 @@ class Game extends ApplicationAdapter {
       batch.end();
     
     } else {
-      
+      //Do not blur, draws the game immidiatley to the screen
       Gdx.gl.glClearColor(0, 0.7.toFloat, 1, 1);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
       
@@ -161,16 +174,20 @@ class Game extends ApplicationAdapter {
       batch.end();
     }
     
+    //adjust camera for ui drawing
     camera.setPosition(Camera.renderWidth / 2 , Camera.renderHeight / 2)
     camera.update()
     batch.setProjectionMatrix(camera.getCamera.combined)
     batch.setShader(defaultShader)
     
     batch.begin()
-    currentState.drawUi(batch)
+    currentState.drawUi(batch) //draw the ui
     batch.end();
   }
   
+  /**
+   * switch current state
+   */
   def enterState(state: State) = {
     if (this.currentState != null)
       this.currentState.exit()
@@ -179,11 +196,17 @@ class Game extends ApplicationAdapter {
     Gdx.input.setCatchBackKey(true)
   }
   
+  /**
+   * called when game exits
+   */
   override def dispose() = {
-    PreferenceHandler.savePreferences()
+    PreferenceHandler.savePreferences() //save preferences
   }
   
+  /**
+   * called when game pauses
+   */
   override def pause () = {
-    PreferenceHandler.savePreferences()
+    PreferenceHandler.savePreferences() //save preferences
   }
 }

@@ -7,6 +7,9 @@ import com.game.physics.Hitbox
 import com.game.AssetHandler._
 import com.badlogic.gdx.math.Vector2
 
+/**
+ * An abstract class that all other platforms must extend
+ */
 abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
 
   protected var xCoord = x
@@ -14,15 +17,9 @@ abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
   protected var width = w
   protected var height = h
   
-  private val t = getTexture(Texture.NORMAL_PLATFORM)
-  protected var tex = new AtlasRegion(t, 0, 0, t.getWidth, t.getHeight)
+  protected var tex: AtlasRegion = _
   
-  private val texture = tex.getTexture
-  private val pixmap = new Pixmap(w.toInt, h.toInt, Pixmap.Format.RGBA8888)
-  texture.getTextureData.prepare()
-  pixmap.drawPixmap(tex.getTexture.getTextureData.consumePixmap(), 0, 0, texture.getWidth, texture.getHeight, 0, 0, w.toInt, h.toInt)
-  
-  protected var hitbox = new Hitbox(x, y, w, h, pixmap)
+  protected var hitbox: Hitbox = _
   
   protected var itemPos = new Vector2(xCoord, yCoord + height)
   
@@ -31,7 +28,7 @@ abstract class Platform(x: Float, y: Float, w: Float, h: Float) {
   def highestPossibleJump: Float
   
   def draw(batch : SpriteBatch) = {
-    batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height)
+    batch.draw(tex, xCoord - width / 2, yCoord - height / 2, width, height) //default draw method for a platform, can be overridden
   }
   
   def getHitBox = hitbox

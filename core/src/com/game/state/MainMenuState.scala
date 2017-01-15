@@ -13,10 +13,14 @@ import com.game.ui.AboutUi
 import com.game.ui.StatsUi
 import com.game.PreferenceHandler._
 
+/**
+ * The main menu of the game
+ */
 class MainMenuState extends State {
   
   private val ui = new MainMenuUi(this)
   
+  //all the different uis used by this state
   private val optionUi = new OptionUi(this)
   private val aboutUi = new AboutUi(this)
   private val statsUi = new StatsUi(this)
@@ -24,10 +28,14 @@ class MainMenuState extends State {
   private val startView = AssetHandler.getTexture(Texture.START_VIEW)
   private val menuBack = AssetHandler.getTexture(Texture.CHALK_BOARD)
   
+  //to keep track of which ui needs to be drawn
   private var isInOptions = false
   private var isInAbout = false
   private var isInStats = false
   
+  /**
+   * enters the main menu state
+   */
   override def enter() = {
     Gdx.input.setInputProcessor(ui)
     Game.soundSystem.loopMusic(AssetHandler.getMusic(AssetHandler.Music.MENU))
@@ -41,6 +49,9 @@ class MainMenuState extends State {
     
   }
   
+  /**
+   * Draws the current ui
+   */
   override def drawUi(batch: SpriteBatch) = {
    
     batch.draw(startView, 0, 0, Camera.renderWidth, Camera.renderHeight)
@@ -90,7 +101,7 @@ class MainMenuState extends State {
       statsUi.highscore.setText(Preferences.highscore.toString())
     statsUi.playTimes.setText(Preferences.timesPlayed.toString())
     var time = Preferences.timePlayed
-    val hours = time / 3600
+    val hours = time / 3600 //calculate hours, minutes and seconds of playtime
     time -= hours * 3600
     val minutes = time / 60
     time -= minutes * 60

@@ -12,6 +12,11 @@ import com.badlogic.gdx.Input.Keys
 
 class AboutUi(state: State) extends Ui(state) {
   
+  /**
+   * ui0-ui3 all contain the components to be shown when in that ui state
+   * allows multiple uis without having to create a whole new ui
+   */
+  
   private val ui0 = Vector[Component](
       
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 22 / 28, 0, 0, "How to play:", getFont(Font.CHALK)),

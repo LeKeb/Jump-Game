@@ -2,6 +2,9 @@ package com.game.state
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
+/**
+ * An abstract class that representates a state in the game, e.g. gmaestate, mainmenustate
+ */
 abstract class State {
   
   def enter():Unit

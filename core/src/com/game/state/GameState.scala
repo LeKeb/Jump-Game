@@ -13,17 +13,21 @@ import com.game.ui.GameOverUi
 import com.game.PreferenceHandler.Preferences
 import com.game.AssetHandler
 
+/**
+ * The state which is the game itself
+ */
 class GameState extends State {
   
-  
+  //some ui:s to be used in this state
   private val ui = new GameUi(this)
   private val gameOverUi = new GameOverUi(this)
-  private var game = new GameWorld(false)
+  
+  private var game = new GameWorld(false) //the GameWorld
   
   private val background = new AtlasRegion(getTexture(Texture.BACKGROUND2), 0, 0, 1, 1)
   private val board = AssetHandler.getTexture(Texture.CHALK_BOARD)
   private var isPaused = false
-  private val pauseState = new PauseState
+  private val pauseState = new PauseState //from when all menus still were different states
   
   private var gameOverRegistered = false
   private var gameOverAlpha = 0f
@@ -34,6 +38,9 @@ class GameState extends State {
   
   def getGame = game
   
+  /**
+   * Enters the state and initialises the values for the game
+   */
   override def enter() = {
     Gdx.input.setInputProcessor(ui)
     game = new GameWorld(hardcore)
@@ -43,26 +50,32 @@ class GameState extends State {
     playTime = 0f
   }
   
+  /**
+   * Exit gamestate
+   */
   override def exit() = {
     isPaused = false
   }
   
+  /**
+   * updates the game
+   */
   override def update(delta: Float) = {
     if (!isPaused && !game.isGameOver) {
       
-      val rot = Gdx.input.getAccelerometerX
+      val rot = Gdx.input.getAccelerometerX //if device has an accelerometer it can be used for controlling the player
       if (rot != 0) {
         if (math.abs(rot) > 0.1) {
           game.getPlayer.addXVelo(-rot * 3 / 5)
         } 
       }
      
-      game.update(delta)
-      ui.scoreView.setText((game.getPlayer.getAllTimeHighestYCoord / 10).toInt.toString())
+      game.update(delta) //update the game world and all the objects inside
+      ui.scoreView.setText((game.getPlayer.getAllTimeHighestYCoord / 10).toInt.toString()) //set the current score visible for the player
       playTime += delta / 60
     }
     if (game.isGameOver && !gameOverRegistered) {
-      
+      //first update since game over, do everything that needs to be done when player looses, save scores etc.
       if (hardcore) {
         Preferences.hardcoreHighscore = game.getScore.max(Preferences.hardcoreHighscore)
         Preferences.hardcorePlayed = true 
@@ -84,6 +97,9 @@ class GameState extends State {
     }
   }
   
+  /**
+   * Draws the current ui used by the gamestate
+   */
   override def drawUi(batch: SpriteBatch) = {
     if (game.isGameOver) {
       val color = batch.getColor.cpy()
@@ -101,10 +117,16 @@ class GameState extends State {
     }
   }
   
+  /**
+   * Draw the gameworld
+   */
   override def drawGame(batch: SpriteBatch) = {
     game.draw(batch)
   }
   
+  /**
+   * Pauses the game
+   */
   def pause() = {
     isPaused = true
     pauseState.enter()
@@ -112,11 +134,17 @@ class GameState extends State {
     game.buttonChanged(false, false)
   }
   
+  /**
+   * Resumes the game
+   */
   def resume() = {
     isPaused = false
     pauseState.exit()
   }
   
+  /**
+   * Should next game start in normal or hardcore mode
+   */
   def setHardcore(hard: Boolean) = {
     this.hardcore = hard
   }

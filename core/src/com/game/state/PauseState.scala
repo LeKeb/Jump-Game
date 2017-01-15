@@ -12,6 +12,9 @@ import com.game.AssetHandler._
 import com.game.Camera
 import com.game.ui.OptionUi
 
+/**
+ * The state to be in when game is paused
+ */
 class PauseState extends State {
   
   private val ui = new PauseUi(this)

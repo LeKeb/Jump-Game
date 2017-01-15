@@ -20,9 +20,13 @@ class Background {
   parallax.setWrap(TextureWrap.ClampToEdge, TextureWrap.Repeat)
   parallax2.setWrap(TextureWrap.ClampToEdge, TextureWrap.Repeat)
   
+  /**
+   * Draws the different backgrounds
+   */
   def draw(batch: SpriteBatch) = {
     val mat = batch.getProjectionMatrix.cpy()
     
+    //move camera to draw background on correct position
     camera.position.set(Camera.renderWidth / 2, Camera.renderHeight / 2, 0)
     camera.update()
     batch.setProjectionMatrix(camera.combined)

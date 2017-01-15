@@ -3,6 +3,9 @@ package com.game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
 
+/**
+ * Handles all the variables that are saved
+ */
 object PreferenceHandler {
   
   object Preferences {

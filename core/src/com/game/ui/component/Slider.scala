@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.Color
 
+/**
+ * A slider that can be used to control some value in the game
+ */
 class Slider(x: Float, y: Float, w: Float, h: Float, min: Int, max: Int, start: Int, spacing: Int, func: (Int) => Unit) extends Component(x, y, w, h) {
   
   private val minVal = min

@@ -7,6 +7,9 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.audio.Music
 
+/**
+ * All the assets used in the game are loaded in here and can be retrieved from here
+ */
 object AssetHandler {
   
   object Texture {

@@ -13,6 +13,9 @@ import com.game.Animation
 import com.game.Camera
 import com.game.Utils
 
+/**
+ * The player itself
+ */
 class Player(x: Float, y: Float, w: Float, h: Float) {
   
   private val texture = getTexture(Texture.PLAYER)
@@ -38,7 +41,7 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
 
   private var xx = 1.toFloat
   
-  private var blackOuts = Buffer[Float]()
+  private var blackOuts = Buffer[Float]() //to keep track of all the different times of the different blackouts
   
   private var isConfused = false
   private var confuseLeft = 0f
@@ -46,12 +49,12 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
   private var isBurning = false
   private var burnLeft = 0f
   
-  private var yAllTimeMax = yCoord
-  private var yThisJumpHighest = yCoord
+  private var yAllTimeMax = yCoord //used for various things, mainly score tracking
+  private var yThisJumpHighest = yCoord //used for determing highest point of current jump
 
   def update(delta: Float) = {
     
-    var multiplier = 1f
+    var multiplier = 1f //used as a boost or slow down for players speed
     
     if (isBurning)
       multiplier = 1.5f
@@ -59,14 +62,15 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     xCoord += xVelo * delta * multiplier
     yCoord += yVelo * delta * multiplier
     
+    //wrap players position the the opposite side of window if it goes outside
     if (xCoord + width / 2 < 0) 
       xCoord = Camera.renderWidth + width / 2
     if (xCoord - width / 2 > Camera.renderWidth)
       xCoord = -width / 2
     
-    yVelo -= (1f * delta * multiplier)
+    yVelo -= (1f * delta * multiplier) //gravity
     
-    xVelo *= 0.9f
+    xVelo *= 0.9f //friction
     if (xVelo.abs < 0.01)
       xVelo = 0
     
@@ -79,7 +83,7 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     }
     
     yThisJumpHighest = Math.max(yCoord, yThisJumpHighest)
-    yAllTimeMax = Math.max(yCoord, yAllTimeMax)
+    yAllTimeMax = Math.max(yCoord, yAllTimeMax) 
     
     rightHitbox.setCoords(xCoord, yCoord)
     leftHitbox.setCoords(xCoord, yCoord)
@@ -93,9 +97,11 @@ class Player(x: Float, y: Float, w: Float, h: Float) {
     if (burnLeft <= 0)
       isBurning = false
     
-    fire.update(delta)
+    if (isBurning)
+      fire.update(delta) //update the fire animation
+    
     if (confuseLeft > 0) {
-      lookingLeft = ((confuseLeft * 5).toInt % 2) == 1
+      lookingLeft = ((confuseLeft * 5).toInt % 2) == 1 //flip the direction player looks towards for a "confuse effect"
     }
   }
 

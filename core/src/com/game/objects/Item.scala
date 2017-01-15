@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion
 import com.game.physics.Hitbox
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
+/**
+ * An abstract class that all items should extend
+ */
 abstract class Item(x: Float, y: Float, w: Float, h: Float) {
   
   protected var xCoord = x

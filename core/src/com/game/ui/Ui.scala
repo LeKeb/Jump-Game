@@ -10,16 +10,25 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.game.state.State
 
+/**
+ * An abstract class that represents a ui
+ */
 abstract class Ui(state: State) extends InputProcessor {
   
   private val components = Buffer[Component]()
   
   protected val parentState = state
   
+  /**
+   * adds a component to the ui
+   */
   protected def addComponent(comp: Component): Unit = {
     components += comp
   }
   
+  /**
+   * removes a component from the ui
+   */
   protected def removeComponent(comp: Component): Unit = {
     components -= comp
   }
@@ -70,7 +79,7 @@ abstract class Ui(state: State) extends InputProcessor {
   }
   
   def draw(batch: SpriteBatch) = {
-    components.foreach(_.draw(batch))
+    components.foreach(_.draw(batch)) //draw all the components
   }
   
 }

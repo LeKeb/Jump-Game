@@ -7,6 +7,9 @@ import com.game.AssetHandler._
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.graphics.Color
 
+/**
+ * Draws text to the screen, can have custom font
+ */
 class TextView(x: Float, y: Float, w: Float, h: Float, t: String, f: BitmapFont) extends Component(x, y, w, h) {
   
   private val font =

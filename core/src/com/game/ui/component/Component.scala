@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.Gdx
 
+/**
+ * A class to representate different ui components
+ */
 abstract class Component(x: Float, y: Float, w: Float, h: Float) {
   
   protected val xCoord = x - w / 2

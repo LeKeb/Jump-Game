@@ -5,6 +5,9 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.audio.Music
 import com.game.PreferenceHandler.Preferences
 
+/**
+ * Handles all the sound and music playing in the game
+ */
 class SoundSystem {
   
   private var soundVolume = 100f

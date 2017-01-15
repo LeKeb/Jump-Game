@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.Pixmap
 import com.game.Utils
 
+/**
+ * Hitbox to be used in collision detection
+ */
 class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
   
   private var xCoord = x - w / 2
@@ -12,6 +15,9 @@ class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
   private var height = h
   private var pixmap = Utils.flipPixmap(pixm, false, true)
   
+  /**
+   * Semi fast method of checking pixelperfect collision between this and another hitbox
+   */
   def isColliding(hb: Hitbox): Boolean = {
     
     if ((xCoord + width <= hb.xCoord || xCoord > hb.xCoord + hb.width) ||
@@ -19,7 +25,7 @@ class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
       false
       
     } else {
-      
+      //only do pixel checking if bounding rectangles collide
       val x1 = Math.max(xCoord, hb.xCoord)
       val x2 = Math.min(xCoord + width, hb.xCoord + hb.width)
       val y1 = Math.max(yCoord, hb.yCoord)
@@ -43,6 +49,9 @@ class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
     
   }
   
+  /**
+   * Returns the collision itself between this and another hitbox or null if no collision occured
+   */
   def getCollision(hb: Hitbox): Collision = {
     if ((xCoord + width <= hb.xCoord || xCoord > hb.xCoord + hb.width) ||
         (yCoord + height <= hb.yCoord || yCoord > hb.yCoord + hb.height)) {
@@ -81,6 +90,9 @@ class Hitbox(x:Float, y:Float, w: Float, h: Float, pixm: Pixmap) {
     }
   }
   
+  /**
+   * update the position of the hitbox
+   */
   def setCoords(x: Float, y: Float) = {
     xCoord = x - w / 2
     yCoord = y - h / 2

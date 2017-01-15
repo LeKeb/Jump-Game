@@ -9,11 +9,15 @@ import com.game.Game
 import com.game.Camera
 import com.badlogic.gdx.graphics.OrthographicCamera
 
+/**
+ * Coconut item, if hit by player part of the sceen is blurred and vision gets worse
+ */
 class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
   
   private val texture = getTexture(Texture.COCONUT)
   private val warnTex = getTexture(Texture.WARNING)
   
+  //Creates the pixmap for pixelperfect hitdetection
   private val pixmap = new Pixmap(w.toInt, h.toInt, Pixmap.Format.RGBA8888)
   texture.getTextureData.prepare()
   pixmap.drawPixmap(texture.getTextureData.consumePixmap(), 0, 0, texture.getWidth, texture.getHeight, 0, 0, w.toInt, h.toInt)
@@ -35,7 +39,7 @@ class Coconut(x: Float, y: Float, w: Float, h: Float) extends Item(x, y, w, h){
     if (yCoord > Game.gameState.getGame.getPlayer.getAllTimeHighestYCoord) {
       val mat = batch.getProjectionMatrix.cpy()
       batch.setProjectionMatrix(cam.combined)
-      batch.draw(warnTex, xCoord - 16.5f, Camera.renderHeight - 120, 33, 100)
+      batch.draw(warnTex, xCoord - 16.5f, Camera.renderHeight - 120, 33, 100) //Draw an exclamation mark before the coconut actually arrives on screen
       batch.setProjectionMatrix(mat)
     }
   }

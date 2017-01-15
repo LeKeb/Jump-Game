@@ -2,8 +2,11 @@ package com.game
 
 import com.badlogic.gdx.graphics.OrthographicCamera
 
+/**
+ * Camera is used when rendering
+ */
 object Camera {
-  val renderWidth = 720.toFloat
+  val renderWidth = 720.toFloat //the virtual screen dimensions
   val renderHeight = 1280.toFloat
 }
 

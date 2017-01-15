@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion
 import com.badlogic.gdx.math.Vector2
 
+/**
+ * A button, when clicked executes an action
+ */
 class Button(x: Float, y: Float, w: Float, h: Float, tex: Texture, twoButtonTex: Boolean, func: () => Unit) extends Component(x, y, w, h) {
   
   private val releasedTex =
