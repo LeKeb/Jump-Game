@@ -83,7 +83,7 @@ class GameWorld(hard: Boolean) {
         val break = (math.log10(last.getY / 10 * 3 - 3000) - 2) / 10
         val boost = (math.log10(last.getY / 10 * 3 - 6000) - 2) / 50
       
-        var minDistVar = (last.highestPossibleJump * 4 / 5 * (getScore / 50000).min(1))
+        var minDistVar = (last.highestPossibleJump * 4 / 5 * (last.getY / 10 / 100000).min(1))
         var nextY = (last.getY + last.highestPossibleJump / 5f + minDistVar + ((last.highestPossibleJump * 4f / 5f - minDistVar) * (math.random * (math.pow(1.01, last.getY / 10 / 100)) / 3).min(1))).toFloat
       
         if (rand < break) {
@@ -110,7 +110,7 @@ class GameWorld(hard: Boolean) {
           items += new Fire(platforms.last.getItemPos.x, platforms.last.getItemPos.y + 70, 200, 200)
       }
     
-      if (getScore > 1000 && math.random < (0.001 + (getScore / 200000f) * 0.1))
+      if (getScore > 1000 && math.random < (0.001 + (getScore / 200000f) * 0.05))
         items += new Coconut((50f + math.random * (Camera.renderWidth - 50)).toFloat , player.getAllTimeHighestYCoord + Camera.renderHeight * 1.5f, 100, 150)
       
     }
