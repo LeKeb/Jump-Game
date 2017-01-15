@@ -25,7 +25,7 @@ class OptionUi(state: State) extends Ui(state) {
   
   addComponent(
       if (state.isInstanceOf[MainMenuState]) {
-      new Button(Camera.renderWidth * 7 / 19, Camera.renderHeight / 4, 490, 133.3f, getTexture(Texture.EXIT_BUTTON), false,
+      new Button(Camera.renderWidth * 7 / 19, Camera.renderHeight * 11 / 40, 350, 100f, getTexture(Texture.EXIT_BUTTON), false,
         () => (
             if (parentState.isInstanceOf[MainMenuState])
               parentState.asInstanceOf[MainMenuState].exitOptions()

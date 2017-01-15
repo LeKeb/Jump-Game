@@ -75,6 +75,8 @@ class AboutUi(state: State) extends Ui(state) {
       
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 11 / 28, 0, 0, "free images", getFont(Font.CHALK)),
       
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 19 / 56, 0, 0, "----------------------", getFont(Font.CHALK)),
+      
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 8 / 28, 0, 0, "Sounds:", getFont(Font.CHALK)),
       
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 6 / 28, 0, 0, "Freesound.org", getFont(Font.CHALK)),
@@ -104,6 +106,12 @@ class AboutUi(state: State) extends Ui(state) {
       
       new TextView(Camera.renderWidth / 2, Camera.renderHeight * 12 / 28, 0, 0, "game library", getFont(Font.CHALK)),
       
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 21 / 56, 0, 0, "----------------------", getFont(Font.CHALK)),
+      
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 9 / 28, 0, 0, "github.com", getFont(Font.CHALK)),
+      
+      new TextView(Camera.renderWidth / 2, Camera.renderHeight * 7 / 28, 0, 0, "/LeKeb/Jump-Game", getFont(Font.CHALK)),
+      
       new Button(Camera.renderWidth * 5 / 18, Camera.renderHeight / 8, 200, 133.3f, getTexture(Texture.ARROW_LEFT), false,
         () => (
             changeUi(2)
@@ -118,7 +126,7 @@ class AboutUi(state: State) extends Ui(state) {
   changeUi(0)
   
   addComponent(
-    new Button(Camera.renderWidth * 5 / 18, Camera.renderHeight * 51 / 60, 200, 70, getTexture(Texture.RESUME_BUTTON), false,
+    new Button(Camera.renderWidth * 5 / 18, Camera.renderHeight * 51 / 60, 200, 70, getTexture(Texture.EXIT_BUTTON), false,
         () => {
           changeUi(0)  
           parentState.asInstanceOf[MainMenuState].exitAbout()
