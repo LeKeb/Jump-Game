@@ -32,7 +32,7 @@ class MainMenuUi(state: State) extends Ui(state) {
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth * 7 / 19, Camera.renderHeight * 11 / 40, 350, 100f, AssetHandler.getTexture(Texture.EXIT_BUTTON), false,
+      new Button(Camera.renderWidth * 7 / 19, Camera.renderHeight * 21 / 80, 450, 133f, AssetHandler.getTexture(Texture.EXIT_BUTTON), false,
         () => (Gdx.app.exit())    
       )      
   )

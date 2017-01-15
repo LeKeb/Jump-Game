@@ -43,6 +43,7 @@ object AssetHandler {
     val M = "m"
     val PAUSE_BUTTON = "pause"
     val STATS_BUTTON = "stats"
+    val MENUBUT = "menuB"
   }
   
   object Sound {
@@ -119,6 +120,7 @@ object AssetHandler {
     textures += Texture.ARROW_RIGHT -> loadTexture("ArrowRight.png")
     textures += Texture.M -> loadTexture("M.png")
     textures += Texture.PAUSE_BUTTON -> loadTexture("Button_pause.png")
+    textures += Texture.MENUBUT -> loadTexture("menubut.png")
     
     sounds += Sound.CRACK -> loadSound("cracking.ogg")
     sounds += Sound.JUMP -> loadSound("jump.ogg")

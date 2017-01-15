@@ -25,7 +25,7 @@ class PauseUi(state: State) extends Ui(state) {
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 400, 133.3f, getTexture(Texture.EXIT_BUTTON),false ,
+      new Button(Camera.renderWidth / 2, Camera.renderHeight / 8, 400, 130.3f, getTexture(Texture.EXIT_BUTTON),false ,
         () => (Game.game.enterState(Game.mainMenuState))
       )      
   )

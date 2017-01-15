@@ -35,7 +35,7 @@ class StatsUi(state: State) extends Ui(state) {
   addComponent(playTimes)
   
   addComponent(
-    new Button(Camera.renderWidth * 5 / 18, Camera.renderHeight * 51 / 60, 200, 70, getTexture(Texture.EXIT_BUTTON), false,
+    new Button(Camera.renderWidth / 2, Camera.renderHeight * 4 / 28, 200, 90, getTexture(Texture.MENUBUT), false,
         () => {
           parentState.asInstanceOf[MainMenuState].exitStats()
         }
