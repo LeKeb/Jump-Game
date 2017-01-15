@@ -118,7 +118,7 @@ class AboutUi(state: State) extends Ui(state) {
   changeUi(0)
   
   addComponent(
-    new Button(Camera.renderWidth * 5 / 18, Camera.renderHeight * 51 / 60, 200, 70, getTexture(Texture.EXIT_BUTTON), false,
+    new Button(Camera.renderWidth * 5 / 18, Camera.renderHeight * 51 / 60, 200, 70, getTexture(Texture.RESUME_BUTTON), false,
         () => {
           changeUi(0)  
           parentState.asInstanceOf[MainMenuState].exitAbout()

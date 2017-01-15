@@ -39,6 +39,7 @@ object AssetHandler {
     val ARROW_RIGHT = "right"
     val M = "m"
     val PAUSE_BUTTON = "pause"
+    val STATS_BUTTON = "stats"
   }
   
   object Sound {
@@ -96,7 +97,7 @@ object AssetHandler {
     textures += Texture.COCONUT -> loadTexture("Coco.png")
     textures += Texture.EXIT_BUTTON -> loadTexture("Button_exit_busstop.png")
     textures += Texture.OPTIONS_BUTTON -> loadTexture("Button_settings.png")
-    textures += Texture.RESUME_BUTTON -> loadTexture("Button_resume.png")
+    textures += Texture.RESUME_BUTTON -> loadTexture("Button_resume_wood.png")
     textures += Texture.PALM_TREE_TOP -> loadTexture("palmTreeTop.png")
     textures += Texture.PALM_TREE_TRUNK -> loadTexture("palmTreeTrunk.png")
     textures += Texture.PARALLAX_BACKGROUND -> loadTexture("parallaxBackground.png")
@@ -109,7 +110,8 @@ object AssetHandler {
     textures += Texture.START_VIEW -> loadTexture("startView.png")
     textures += Texture.BACKGROUND2 -> loadTexture("background2.png")
     textures += Texture.CHALK_BOARD -> loadTexture("Chalckboard_big.png")
-    textures += Texture.ABOUT_BUTTON -> loadTexture("Button_about.png")
+    textures += Texture.ABOUT_BUTTON -> loadTexture("Button_about_warmed.png")
+    textures += Texture.STATS_BUTTON -> loadTexture("Button_stats.png")
     textures += Texture.ARROW_LEFT -> loadTexture("ArrowLeft.png")
     textures += Texture.ARROW_RIGHT -> loadTexture("ArrowRight.png")
     textures += Texture.M -> loadTexture("M.png")

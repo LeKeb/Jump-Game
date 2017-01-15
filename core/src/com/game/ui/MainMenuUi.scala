@@ -42,7 +42,7 @@ class MainMenuUi(state: State) extends Ui(state) {
       )      
   )
   addComponent(
-      new Button(Camera.renderWidth * 11 / 18, Camera.renderHeight * 23 / 42, 350, 100f, AssetHandler.getTexture(Texture.COCONUT), false,
+      new Button(Camera.renderWidth * 11 / 18, Camera.renderHeight * 23 / 42, 350, 100f, AssetHandler.getTexture(Texture.STATS_BUTTON), false,
         () => (parentState.asInstanceOf[MainMenuState].enterStats())    
       )      
   )
